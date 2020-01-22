@@ -1,0 +1,45 @@
+{
+    "name": "romanzipp/laravel-migration-generator",
+    "description": "Laravel Migration Generator",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "romanzipp",
+            "email": "ich@ich.wtf",
+            "homepage": "https://ich.wtf"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "illuminate/console": "^5.5|^6.0",
+        "illuminate/support": "^5.5|^6.0",
+        "ext-json": "*",
+        "doctrine/dbal": "^2.10"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "orchestra/testbench": "^3.8",
+        "codedungeon/phpunit-result-printer": "^0.23.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "romanzipp\\MigrationGenerator\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "romanzipp\\MigrationGenerator\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "romanzipp\\MigrationGenerator\\Providers\\MigrationGeneratorServiceProvider"
+            ]
+        }
+    }
+}
