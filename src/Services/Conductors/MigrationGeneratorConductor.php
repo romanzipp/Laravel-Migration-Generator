@@ -37,7 +37,7 @@ class MigrationGeneratorConductor
         $this->replace('{UP_BODY}', $this->buildUpBody());
         $this->replace('{DOWN_BODY}', $this->buildDownBody());
 
-        dd($this->stub);
+        dd($this->columns, $this->stub);
 
         return $this;
     }

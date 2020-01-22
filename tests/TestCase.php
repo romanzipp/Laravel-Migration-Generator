@@ -55,12 +55,11 @@ abstract class TestCase extends BaseTestCase
      */
     protected function setUpDatabase(Application $app)
     {
-        $app['db']->connection()->getSchemaBuilder()->create('basic_table_incrementing_timestamps', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+        $app['db']->connection()->getSchemaBuilder()->create('basic_table', function (Blueprint $table) {
 
-        $app['db']->connection()->getSchemaBuilder()->create('varchar_table', function (Blueprint $table) {
+            $table->integer('integer');
+            $table->unsignedInteger('unsigned_integer');
+
             $table->string('string');
             $table->string('nullable_string');
             $table->string('string_length_20', 20);
