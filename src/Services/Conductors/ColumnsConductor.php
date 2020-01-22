@@ -29,9 +29,11 @@ class ColumnsConductor
      */
     public function getColumns(): array
     {
-        $columns = $this->connection->getSchemaBuilder()->getColumnListing($this->table);
+        $columns = [];
 
-        foreach ($columns as $key => $column) {
+        $result = $this->connection->getSchemaBuilder()->getColumnListing($this->table);
+
+        foreach ($result as $key => $column) {
             $columns[$column] = $this->connection->getDoctrineColumn($this->table, $column);
         }
 

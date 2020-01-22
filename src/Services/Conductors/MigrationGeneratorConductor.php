@@ -67,6 +67,13 @@ class MigrationGeneratorConductor
         $lines = [];
 
         $lines[] = sprintf('Schema::create(\'%s\', function (Blueprint $table) {', $this->table);
+
+        foreach ($this->columns as $column) {
+
+            $info = new ColumnInfoConductor($column);
+            $lines[] = $info();
+        }
+
         $lines[] = '});';
 
         return implode(PHP_EOL, $lines);
