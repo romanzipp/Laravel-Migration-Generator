@@ -63,6 +63,8 @@ abstract class TestCase extends BaseTestCase
             $table->string('string');
             $table->string('nullable_string');
             $table->string('string_length_20', 20);
+
+            $table->decimal('decimal', 6,4);
         });
     }
 }

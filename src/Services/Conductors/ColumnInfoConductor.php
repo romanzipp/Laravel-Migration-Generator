@@ -60,26 +60,44 @@ class ColumnInfoConductor
         switch (get_class($this->column->getType())) {
 
             case ArrayType::class:
+                break;
+
             case BigIntType::class:
                 return new MigrationColumnMethod('bigInteger', [$this->column->getName(), $this->column->getPrecision()]);
 
             case BinaryType::class:
+                return new MigrationColumnMethod('binary', [$this->column->getName()]);
+
             case BlobType::class:
+                break;
 
             case BooleanType::class:
                 return new MigrationColumnMethod('boolean', [$this->column->getName()]);
 
             case DateImmutableType::class:
+                break;
+
             case DateIntervalType::class:
+                break;
+
             case DateTimeImmutableType::class:
+                break;
 
             case DateTimeType::class:
-                return new MigrationColumnMethod('datetime', [$this->column->getName()]);
+                return new MigrationColumnMethod('dateTime', [$this->column->getName()]);
 
             case DateTimeTzImmutableType::class:
+                break;
+
             case DateTimeTzType::class:
+                return new MigrationColumnMethod('dateTimeTz', [$this->column->getName(), $this->column->getPrecision()]);
+
             case DateType::class:
+                return new MigrationColumnMethod('date', [$this->column->getName()]);
+
             case DecimalType::class:
+                return new MigrationColumnMethod('decimal', [$this->column->getName()]);
+
             case FloatType::class:
             case GuidType::class:
 
@@ -87,18 +105,34 @@ class ColumnInfoConductor
                 return new MigrationColumnMethod('integer', [$this->column->getName(), $this->column->getPrecision()]);
 
             case JsonType::class:
+                return new MigrationColumnMethod('json', [$this->column->getName()]);
+
             case ObjectType::class:
+                break;
+
             case SimpleArrayType::class:
+                break;
+
             case SmallIntType::class:
+                return new MigrationColumnMethod('smallInteger', [$this->column->getName()]);
 
             case StringType::class:
                 return new MigrationColumnMethod('string', [$this->column->getName()]);
 
             case TextType::class:
+                return new MigrationColumnMethod('text', [$this->column->getName()]);
+
             case TimeImmutableType::class:
+                break;
+
             case TimeType::class:
+                return new MigrationColumnMethod('time', [$this->column->getName(), $this->column->getPrecision()]);
+
             case VarDateTimeImmutableType::class:
+                break;
+
             case VarDateTimeType::class:
+                break;
         }
 
         return null;

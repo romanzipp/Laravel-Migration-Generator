@@ -13,7 +13,7 @@ class {TABLE} extends Migration
      */
     public function up()
     {
-        {UP_BODY}
+{UP_BODY}
     }
 
     /**
@@ -23,6 +23,6 @@ class {TABLE} extends Migration
      */
     public function down()
     {
-        {DOWN_BODY}
+{DOWN_BODY}
     }
 }

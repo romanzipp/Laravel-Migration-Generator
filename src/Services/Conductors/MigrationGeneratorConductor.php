@@ -8,6 +8,10 @@ class MigrationGeneratorConductor
 {
     const STUB = __DIR__ . '/../../../stubs/migration.stub';
 
+    const IND4 = '    ';
+    const IND8 = '        ';
+    const IND12 = '            ';
+
     /**
      * @var string
      */
@@ -66,22 +70,22 @@ class MigrationGeneratorConductor
     {
         $lines = [];
 
-        $lines[] = sprintf('Schema::create(\'%s\', function (Blueprint $table) {', $this->table);
+        $lines[] = self::IND8 . sprintf('Schema::create(\'%s\', function (Blueprint $table) {', $this->table);
 
         foreach ($this->columns as $column) {
 
             $info = new ColumnInfoConductor($column);
-            $lines[] = $info();
+            $lines[] = self::IND12 . $info();
         }
 
-        $lines[] = '});';
+        $lines[] = self::IND8 . '});';
 
         return implode(PHP_EOL, $lines);
     }
 
     public function buildDownBody(): string
     {
-        return sprintf('Schema::dropIfExists(\'%s\');', $this->table);
+        return self::IND8 . sprintf('Schema::dropIfExists(\'%s\');', $this->table);
     }
 
     private function replace(string $find, string $replace)
