@@ -5,6 +5,7 @@ namespace romanzipp\MigrationGenerator\Services;
 use Illuminate\Database\Connection;
 use Illuminate\Foundation\Application;
 use romanzipp\MigrationGenerator\Services\Conductors\ColumnsConductor;
+use romanzipp\MigrationGenerator\Services\Conductors\MigrationGeneratorConductor;
 use romanzipp\MigrationGenerator\Services\Conductors\TablesConductor;
 
 class MigrationGeneratorService
@@ -18,6 +19,11 @@ class MigrationGeneratorService
      * @var string|null
      */
     private $connection = null;
+
+    /**
+     * @var array
+     */
+    private $migrations = [];
 
     public function __construct(Application $application)
     {
@@ -57,8 +63,14 @@ class MigrationGeneratorService
         $tables = (new TablesConductor($connection))->getTables();
 
         foreach ($tables as $table) {
+            /** @var string $table */
 
+            /** @var \Doctrine\DBAL\Schema\Column[] $columns */
             $columns = (new ColumnsConductor($connection, $table))->getColumns();
+
+            $migration = (new MigrationGeneratorConductor($table, $columns));
+
+            $this->migrations[] = $migration();
         }
     }
 }

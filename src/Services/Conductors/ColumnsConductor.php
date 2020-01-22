@@ -6,8 +6,14 @@ use Illuminate\Database\Connection;
 
 class ColumnsConductor
 {
+    /**
+     * @var \Illuminate\Database\Connection
+     */
     private $connection;
 
+    /**
+     * @var string
+     */
     private $table;
 
     public function __construct(Connection $connection, string $table)
