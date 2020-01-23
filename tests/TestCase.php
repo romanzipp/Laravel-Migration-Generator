@@ -19,9 +19,9 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->setUpDatabase($this->app);
+        $this->artisan('migrate:fresh')->run();
 
-        $this->artisan('migrate')->run();
+        $this->setUpDatabase($this->app);
     }
 
     /**
@@ -56,8 +56,9 @@ abstract class TestCase extends BaseTestCase
     protected function setUpDatabase(Application $app)
     {
         $app['db']->connection()->getSchemaBuilder()->create('unsigned_integers', function (Blueprint $table) {
-            $table->integer('integer');
-            $table->integer('unsigned_integer')->unsigned();
+            $table->bigInteger('bigInteger')->unsigned();
+            $table->integer('integer')->unsigned();
+            $table->smallInteger('smallInteger')->unsigned();
         });
 
         $app['db']->connection()->getSchemaBuilder()->create('complete_table_nullable', function (Blueprint $table) {

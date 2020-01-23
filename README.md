@@ -24,6 +24,11 @@ Copy configuration to config folder:
 $ php artisan vendor:publish --provider="romanzipp\MigrationGenerator\Providers\MigrationGeneratorProvider"
 ```
 
+## Support
+
+- MariaDB
+- SQLite
+
 ## Testing
 
 ```

@@ -3,6 +3,7 @@
 namespace romanzipp\MigrationGenerator\Services\Conductors;
 
 use Illuminate\Database\Connection;
+use Illuminate\Database\MySqlConnection;
 use Illuminate\Database\SQLiteConnection;
 use LogicException;
 
@@ -31,11 +32,32 @@ class TablesConductor
             return $this->getTablesForSQLite();
         }
 
+        if ($this->connection instanceof MySqlConnection) {
+            return $this->getTablesForMySql();
+        }
+
         try {
             return $this->connection->getSchemaBuilder()->getAllTables();
         } catch (LogicException $e) {
             return [];
         }
+    }
+
+    private function getTablesForMySql()
+    {
+        $result = $this->connection->getSchemaBuilder()->getAllTables();
+
+        return array_filter(
+            array_map(
+                function ($item) {
+                    return $item->Tables_in_migration_generator;
+                },
+                $result
+            ),
+            function ($table) {
+                return ! in_array($table, self::LARAVEL_TABLES);
+            }
+        );
     }
 
     private function getTablesForSQLite(): array
