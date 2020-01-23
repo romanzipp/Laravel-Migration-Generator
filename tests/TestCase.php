@@ -55,7 +55,12 @@ abstract class TestCase extends BaseTestCase
      */
     protected function setUpDatabase(Application $app)
     {
-        $app['db']->connection()->getSchemaBuilder()->create('basic_table_nullable', function (Blueprint $table) {
+        $app['db']->connection()->getSchemaBuilder()->create('unsigned_integers', function (Blueprint $table) {
+            $table->integer('integer');
+            $table->integer('unsigned_integer')->unsigned();
+        });
+
+        $app['db']->connection()->getSchemaBuilder()->create('complete_table_nullable', function (Blueprint $table) {
             $table->bigInteger('bigInteger')->nullable();
             $table->binary('binary')->nullable();
             $table->boolean('boolean')->nullable();
@@ -71,7 +76,7 @@ abstract class TestCase extends BaseTestCase
             $table->time('time')->nullable();
         });
 
-        $app['db']->connection()->getSchemaBuilder()->create('basic_table', function (Blueprint $table) {
+        $app['db']->connection()->getSchemaBuilder()->create('complete_table', function (Blueprint $table) {
             $table->bigInteger('bigInteger');
             $table->binary('binary');
             $table->boolean('boolean');

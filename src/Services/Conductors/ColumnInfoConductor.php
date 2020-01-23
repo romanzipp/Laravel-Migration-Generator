@@ -56,6 +56,18 @@ class ColumnInfoConductor
             $methods[] = new MigrationColumnMethod('nullable');
         }
 
+        if ($this->column->getComment() !== null) {
+            $methods[] = new MigrationColumnMethod('comment', [$this->column->getComment()]);
+        }
+
+        if ($this->column->getDefault() !== null) {
+            $methods[] = new MigrationColumnMethod('default', [$this->column->getDefault()]);
+        }
+
+        if ($this->column->getUnsigned() === true) {
+            $methods[] = new MigrationColumnMethod('unsigned');
+        }
+
         return $methods;
     }
 
@@ -104,7 +116,7 @@ class ColumnInfoConductor
             case GuidType::class:
 
             case IntegerType::class:
-                return new MigrationColumnMethod('integer', [$this->column->getName(), $this->column->getPrecision()]);
+                return new MigrationColumnMethod('integer', [$this->column->getName(), false, $this->column->getPrecision()]);
 
             case JsonType::class:
                 return new MigrationColumnMethod('json', [$this->column->getName()]);
@@ -147,7 +159,18 @@ class ColumnInfoConductor
         $method .= '(';
 
         foreach ($parameters as $index => $parameter) {
-            $method .= (is_string($parameter) ? sprintf('\'%s\'', $parameter) : $parameter) . ($index + 1 < count($parameters) ? ', ' : '');
+
+            if (is_bool($parameter)) {
+                $method .= $parameter ? 'true' : 'false';
+            } elseif (is_string($parameter)) {
+                $method .= sprintf('\'%s\'', $parameter);
+            } else {
+                $method .= $parameter;
+            }
+
+            if ($index + 1 < count($parameters)) {
+                $method .= ', ';
+            }
         }
 
         $method .= ')';
