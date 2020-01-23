@@ -6,7 +6,15 @@ use romanzipp\MigrationGenerator\Services\Conductors\TablesConductor;
 
 class TablesConductorTest extends TestCase
 {
-    public function testGetTables()
+    public function testTablesHasNumericKeys()
+    {
+        $this->assertArrayHasKey(
+            0,
+            (new TablesConductor($this->db()))->getTables()
+        );
+    }
+
+    public function testTablesAreAsExpected()
     {
         $tables = (new TablesConductor($this->db()))->getTables();
 

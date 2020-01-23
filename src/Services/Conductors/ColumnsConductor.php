@@ -34,7 +34,7 @@ class ColumnsConductor
         $result = $this->connection->getSchemaBuilder()->getColumnListing($this->table);
 
         foreach ($result as $key => $column) {
-            $columns[$column] = $this->connection->getDoctrineColumn($this->table, $column);
+            $columns[] = $this->connection->getDoctrineColumn($this->table, $column);
         }
 
         return $columns;
