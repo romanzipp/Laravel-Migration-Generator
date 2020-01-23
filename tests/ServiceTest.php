@@ -3,17 +3,17 @@
 namespace romanzipp\MigrationGenerator\Tests;
 
 use Doctrine\DBAL\Driver\PDOConnection;
-use Illuminate\Database\SQLiteConnection;
+use Illuminate\Database\Connection;
 use romanzipp\MigrationGenerator\Services\MigrationGeneratorService;
 
 class ServiceTest extends TestCase
 {
     public function testServiceDatabaseConnection()
     {
-        /** @var SQLiteConnection $connection */
+        /** @var Connection $connection */
         $connection = app(MigrationGeneratorService::class)->getDatabaseConnection();
 
-        $this->assertInstanceOf(SQLiteConnection::class, $connection);
+        $this->assertInstanceOf(Connection::class, $connection);
         $this->assertInstanceOf(PDOConnection::class, $connection->getPdo());
     }
 }

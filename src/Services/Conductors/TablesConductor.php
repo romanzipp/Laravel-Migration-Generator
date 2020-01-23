@@ -28,6 +28,11 @@ class TablesConductor
 
     public function getTables(): array
     {
+        return array_values($this->getTablesByConnection());
+    }
+
+    private function getTablesByConnection()
+    {
         if ($this->connection instanceof SQLiteConnection) {
             return $this->getTablesForSQLite();
         }
