@@ -5,6 +5,7 @@ namespace romanzipp\MigrationGenerator\Services;
 use Illuminate\Database\Connection;
 use Illuminate\Foundation\Application;
 use romanzipp\MigrationGenerator\Services\Conductors\ColumnsConductor;
+use romanzipp\MigrationGenerator\Services\Conductors\FileStorageConductor;
 use romanzipp\MigrationGenerator\Services\Conductors\MigrationGeneratorConductor;
 use romanzipp\MigrationGenerator\Services\Conductors\TablesConductor;
 
@@ -72,5 +73,7 @@ class MigrationGeneratorService
 
             $this->migrations[] = $migration();
         }
+
+        (new FileStorageConductor($this->migrations))();
     }
 }

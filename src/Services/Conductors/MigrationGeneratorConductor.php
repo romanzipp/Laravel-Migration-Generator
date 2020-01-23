@@ -64,6 +64,14 @@ class MigrationGeneratorConductor
         return date('Y_m_d_His') . '_create_' . $this->table . '_table.php';
     }
 
+    /**
+     * @return string
+     */
+    public function getStub(): string
+    {
+        return $this->stub;
+    }
+
     public function buildUpBody(): string
     {
         $lines = [];
