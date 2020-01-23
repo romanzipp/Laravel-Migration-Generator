@@ -52,6 +52,10 @@ class ColumnInfoConductor
 
         $methods[] = $this->getMethod();
 
+        if ($this->column->getNotnull() === false) {
+            $methods[] = new MigrationColumnMethod('nullable');
+        }
+
         return $methods;
     }
 
@@ -66,10 +70,8 @@ class ColumnInfoConductor
                 return new MigrationColumnMethod('bigInteger', [$this->column->getName(), $this->column->getPrecision()]);
 
             case BinaryType::class:
-                return new MigrationColumnMethod('binary', [$this->column->getName()]);
-
             case BlobType::class:
-                break;
+                return new MigrationColumnMethod('binary', [$this->column->getName()]);
 
             case BooleanType::class:
                 return new MigrationColumnMethod('boolean', [$this->column->getName()]);
@@ -158,6 +160,11 @@ class ColumnInfoConductor
         $line = '$this';
 
         foreach ($this->getChainedMethods() as $method) {
+
+            if ($method == null) {
+                continue;
+            }
+
             $line .= $this->buildMethodSignature($method->name, $method->parameters);
         }
 

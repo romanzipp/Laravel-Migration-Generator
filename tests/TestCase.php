@@ -55,16 +55,36 @@ abstract class TestCase extends BaseTestCase
      */
     protected function setUpDatabase(Application $app)
     {
+        $app['db']->connection()->getSchemaBuilder()->create('basic_table_nullable', function (Blueprint $table) {
+            $table->bigInteger('bigInteger')->nullable();
+            $table->binary('binary')->nullable();
+            $table->boolean('boolean')->nullable();
+            $table->dateTime('dateTime')->nullable();
+            $table->dateTimeTz('dateTimeTz')->nullable();
+            $table->date('date')->nullable();
+            $table->decimal('decimal')->nullable();
+            $table->integer('integer')->nullable();
+            $table->json('json')->nullable();
+            $table->smallInteger('smallInteger')->nullable();
+            $table->string('string')->nullable();
+            $table->text('text')->nullable();
+            $table->time('time')->nullable();
+        });
+
         $app['db']->connection()->getSchemaBuilder()->create('basic_table', function (Blueprint $table) {
-
+            $table->bigInteger('bigInteger');
+            $table->binary('binary');
+            $table->boolean('boolean');
+            $table->dateTime('dateTime');
+            $table->dateTimeTz('dateTimeTz');
+            $table->date('date');
+            $table->decimal('decimal');
             $table->integer('integer');
-            $table->unsignedInteger('unsigned_integer');
-
+            $table->json('json');
+            $table->smallInteger('smallInteger');
             $table->string('string');
-            $table->string('nullable_string');
-            $table->string('string_length_20', 20);
-
-            $table->decimal('decimal', 6,4);
+            $table->text('text');
+            $table->time('time');
         });
     }
 }

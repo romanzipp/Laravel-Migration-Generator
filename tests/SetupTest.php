@@ -9,6 +9,8 @@ class SetupTest extends TestCase
 {
     public function testTableCreation()
     {
+        $this->markTestSkipped();
+
         $info = $this->db()->getSchemaBuilder()->getColumnListing('basic_table_incrementing_timestamps');
 
         $this->assertEquals([
