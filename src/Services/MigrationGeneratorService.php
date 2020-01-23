@@ -69,9 +69,7 @@ class MigrationGeneratorService
             /** @var \Doctrine\DBAL\Schema\Column[] $columns */
             $columns = (new ColumnsConductor($connection, $table))->getColumns();
 
-            $migration = (new MigrationGeneratorConductor($table, $columns));
-
-            $this->migrations[] = $migration();
+            $this->migrations[] = (new MigrationGeneratorConductor($table, $columns))();
         }
 
         (new FileStorageConductor($this->migrations))();
