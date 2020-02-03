@@ -10,6 +10,8 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
+    const OUTPUT_DIR = __DIR__ . '/Support/files';
+
     /**
      * Setup the test environment.
      *
@@ -18,6 +20,8 @@ abstract class TestCase extends BaseTestCase
     public function setUp(): void
     {
         parent::setUp();
+
+        config(['migration-generator.path' => __DIR__ . '/Support/files']);
 
         $this->artisan('migrate:fresh')->run();
 

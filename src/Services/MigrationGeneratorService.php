@@ -53,6 +53,16 @@ class MigrationGeneratorService
     }
 
     /**
+     * Get all generated migrations.
+     *
+     * @return MigrationGeneratorConductor[]
+     */
+    public function getMigrations(): array
+    {
+        return $this->migrations;
+    }
+
+    /**
      * Execute the migration generator.
      *
      * @return void
