@@ -2,8 +2,10 @@
 
 namespace romanzipp\MigrationGenerator\Services;
 
+use Closure;
 use Illuminate\Database\Connection;
 use Illuminate\Foundation\Application;
+use romanzipp\MigrationGenerator\Console\Commands\GenerateMigrationsCommand;
 use romanzipp\MigrationGenerator\Services\Conductors\ColumnsConductor;
 use romanzipp\MigrationGenerator\Services\Conductors\FileStorageConductor;
 use romanzipp\MigrationGenerator\Services\Conductors\MigrationGeneratorConductor;
@@ -26,6 +28,11 @@ class MigrationGeneratorService
      */
     private $migrations = [];
 
+    /**
+     * @var GenerateMigrationsCommand
+     */
+    private $command;
+
     public function __construct(Application $application)
     {
         $this->application = $application;
@@ -38,6 +45,19 @@ class MigrationGeneratorService
     public function connection(string $connection): self
     {
         $this->connection = $connection;
+
+        return $this;
+    }
+
+    /**
+     * Set the executing command to enable cli logging.
+     *
+     * @param \romanzipp\MigrationGenerator\Console\Commands\GenerateMigrationsCommand $command
+     * @return $this
+     */
+    public function command(GenerateMigrationsCommand $command): self
+    {
+        $this->command = $command;
 
         return $this;
     }
@@ -82,6 +102,23 @@ class MigrationGeneratorService
             $this->migrations[] = (new MigrationGeneratorConductor($table, $columns))();
         }
 
+        $this->commandExec(function (GenerateMigrationsCommand $command) {
+            $command->confirm(sprintf('Found %d Migrations. Continue?', count($this->migrations)));
+        });
+
         (new FileStorageConductor($this->migrations))();
+
+        $this->commandExec(function (GenerateMigrationsCommand $command) {
+            $command->info('Finished');
+        });
+    }
+
+    private function commandExec(Closure $callback): void
+    {
+        if ( ! $this->command) {
+            return;
+        }
+
+        $callback($this->command);
     }
 }
