@@ -180,7 +180,7 @@ class ColumnInfoConductor
 
     public function __invoke()
     {
-        $line = '$this';
+        $line = '$table';
 
         foreach ($this->getChainedMethods() as $method) {
 
