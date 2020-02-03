@@ -2,6 +2,11 @@
 
 return [
     /*
+     * The database connection to be used.
+     */
+    'connection'         => null,
+
+    /*
      * Where to store new generated migration files.
      */
     'output_path'        => database_path('migrations'),

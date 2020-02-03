@@ -89,6 +89,10 @@ class MigrationGeneratorService
      */
     public function __invoke(): void
     {
+        if ($this->connection === null) {
+            $this->connection = config('migration-generator.connection');
+        }
+
         $connection = $this->getDatabaseConnection();
 
         $tables = (new TablesConductor($connection))->getTables();

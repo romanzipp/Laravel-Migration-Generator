@@ -12,7 +12,8 @@ class GenerateMigrationsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'mg:generate {--connection=}';
+    protected $signature = 'mg:generate
+                            {--connection= : The connection to be used}';
 
     /**
      * The console command description.
