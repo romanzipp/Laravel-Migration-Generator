@@ -1,5 +1,7 @@
 # Laravel Migration Generator
 
+**WORK IN PROGRESS**
+
 Generate Laravel migration files from existing databases.
 
 ## Installation
