@@ -31,7 +31,7 @@ class GenerateMigrationsCommand extends Command
         /** @var MigrationGeneratorService $service */
         $service = app(MigrationGeneratorService::class);
 
-        if ($connection = $this->argument('connection')) {
+        if ($connection = $this->option('connection')) {
             $service->connection($connection);
         }
 
