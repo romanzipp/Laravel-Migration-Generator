@@ -18,7 +18,7 @@ class FileStorageConductor
     {
         foreach ($this->migrations as $migration) {
 
-            $path = database_path(sprintf('migrations/%s', $migration->getFileName()));
+            $path = sprintf('%s/%s', config('migration-generator.path'), $migration->getFileName());
 
             file_put_contents(
                 $path,
