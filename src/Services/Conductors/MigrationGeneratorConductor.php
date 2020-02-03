@@ -81,7 +81,11 @@ class MigrationGeneratorConductor
      */
     public function getFileName(): string
     {
-        return date('Y_m_d_His') . '_create_' . $this->table . '_table.php';
+        $name = config('migration-generator.file_name_template');
+        $name = str_replace('{date}', date('Y_m_d_His'), $name);
+        $name = str_replace('{table}', $this->table, $name);
+
+        return $name;
     }
 
     /**
