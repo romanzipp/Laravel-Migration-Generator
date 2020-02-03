@@ -1,5 +1,10 @@
 # Laravel Migration Generator
 
+[![Latest Stable Version](https://img.shields.io/packagist/v/romanzipp/laravel-migration-generator.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-migration-generator)
+[![Total Downloads](https://img.shields.io/packagist/dt/romanzipp/laravel-migration-generator.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-migration-generator)
+[![License](https://img.shields.io/packagist/l/romanzipp/laravel-migration-generator.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-migration-generator)
+[![Travis Build Status](https://img.shields.io/travis/romanzipp/Laravel-Migration-Generator/master.svg?style=flat-square)](https://travis-ci.org/romanzipp/Laravel-Migration-Generator)
+
 **WORK IN PROGRESS**
 
 Generate Laravel migration files from existing databases.
