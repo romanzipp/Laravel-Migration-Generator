@@ -45,6 +45,26 @@ class MigrationGeneratorConductor
     }
 
     /**
+     * Get columns.
+     *
+     * @return \Doctrine\DBAL\Schema\Column[]
+     */
+    public function getColumns(): array
+    {
+        return $this->columns;
+    }
+
+    /**
+     * Get the table name.
+     *
+     * @return string
+     */
+    public function getTable(): string
+    {
+        return $this->table;
+    }
+
+    /**
      * Generate the migration class name.
      *
      * @return string
