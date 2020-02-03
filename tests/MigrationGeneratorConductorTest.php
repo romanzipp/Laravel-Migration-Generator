@@ -45,24 +45,24 @@ class MigrationGeneratorConductorTest extends TestCase
     public function testBuildDownBodyBasic()
     {
         $this->assertEquals(
-            '        Schema::dropIfExists(\'foo\');',
-            (new MigrationGeneratorConductor('foo', []))->buildDownBody()
+            'Schema::dropIfExists(\'foo\');',
+            trim((new MigrationGeneratorConductor('foo', []))->buildDownBody())
         );
     }
 
     public function testBuildDownBodyUnderscore()
     {
         $this->assertEquals(
-            '        Schema::dropIfExists(\'foo_bar\');',
-            (new MigrationGeneratorConductor('foo_bar', []))->buildDownBody()
+            'Schema::dropIfExists(\'foo_bar\');',
+            trim((new MigrationGeneratorConductor('foo_bar', []))->buildDownBody())
         );
     }
 
     public function testBuildDownBodyMultipleUnderscore()
     {
         $this->assertEquals(
-            '        Schema::dropIfExists(\'foo__bar\');',
-            (new MigrationGeneratorConductor('foo__bar', []))->buildDownBody()
+            'Schema::dropIfExists(\'foo__bar\');',
+            trim((new MigrationGeneratorConductor('foo__bar', []))->buildDownBody())
         );
     }
 }
