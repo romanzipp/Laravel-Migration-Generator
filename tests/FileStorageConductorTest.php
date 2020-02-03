@@ -16,18 +16,14 @@ class FileStorageConductorTest extends TestCase
     {
         parent::setUp();
 
-        $files = scandir(self::OUTPUT);
+        $this->cleanUpFiles();
+    }
 
-        foreach ($files as $file) {
+    protected function tearDown(): void
+    {
+        $this->cleanUpFiles();
 
-            $filePath = self::OUTPUT . '/' . $file;
-
-            if (pathinfo($filePath, PATHINFO_EXTENSION) !== 'php') {
-                continue;
-            }
-
-            unlink($filePath);
-        }
+        parent::tearDown();
     }
 
     public function testStoringFile()
@@ -59,6 +55,22 @@ class FileStorageConductorTest extends TestCase
             $this->assertFileExists(
                 __DIR__ . '/Support/files/' . $migration->getFileName()
             );
+        }
+    }
+
+    protected function cleanUpFiles(): void
+    {
+        $files = scandir(self::OUTPUT);
+
+        foreach ($files as $file) {
+
+            $filePath = self::OUTPUT . '/' . $file;
+
+            if (pathinfo($filePath, PATHINFO_EXTENSION) !== 'php') {
+                continue;
+            }
+
+            unlink($filePath);
         }
     }
 }
