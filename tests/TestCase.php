@@ -3,10 +3,10 @@
 namespace romanzipp\MigrationGenerator\Tests;
 
 use Illuminate\Database\Connection;
-use Illuminate\Database\MigrationServiceProvider;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use romanzipp\MigrationGenerator\Providers\MigrationGeneratorProvider;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -38,7 +38,7 @@ abstract class TestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            MigrationServiceProvider::class,
+            MigrationGeneratorProvider::class,
         ];
     }
 
