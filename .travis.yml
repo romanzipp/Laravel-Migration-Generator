@@ -8,8 +8,8 @@ php:
 env:
   - COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=sqlite DB_DATABASE=':memory:'
   - COMPOSER_FLAGS=""                DB_CONNECTION=sqlite DB_DATABASE=':memory:'
-  - COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1
-  - COMPOSER_FLAGS=""                DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1
+  - COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
+  - COMPOSER_FLAGS=""                DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
 
 services:
   - mysql
