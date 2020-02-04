@@ -52,18 +52,20 @@ class TablesConductor
     {
         // Laravel 5.* support
         if (is_callable([$this->connection->getSchemaBuilder(), 'getAllTables'])) {
-            $result = $this->connection->getSchemaBuilder()->getAllTables();
-        } else {
-            $result = $this->connection->getDoctrineSchemaManager()->listTableNames();
-        }
 
-        return array_filter(
-            array_map(
+            $tables = array_map(
                 function ($item) {
                     return $item->Tables_in_migration_generator;
                 },
-                $result
-            ),
+                $this->connection->getSchemaBuilder()->getAllTables()
+            );
+
+        } else {
+            $tables = $this->connection->getDoctrineSchemaManager()->listTableNames();
+        }
+
+        return array_filter(
+            $tables,
             function ($table) {
                 return ! in_array($table, self::LARAVEL_TABLES);
             }
