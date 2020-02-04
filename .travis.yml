@@ -15,7 +15,7 @@ services:
   - mysql
 
 before_script:
-  - mysql -e 'create database migration_generator'
+  - mysql -e 'CREATE DATABASE migration_generator'
   - travis_retry composer self-update
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 
