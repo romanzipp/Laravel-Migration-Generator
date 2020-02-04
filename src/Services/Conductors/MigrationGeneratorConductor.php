@@ -27,6 +27,11 @@ class MigrationGeneratorConductor
      */
     private $stub;
 
+    /**
+     * @var string
+     */
+    private $fileName;
+
     public function __construct(string $table, array $columns)
     {
         $this->table = $table;
@@ -81,11 +86,13 @@ class MigrationGeneratorConductor
      */
     public function getFileName(): string
     {
-        $name = config('migration-generator.file_name_template');
-        $name = str_replace('{date}', date('Y_m_d_His'), $name);
-        $name = str_replace('{table}', $this->table, $name);
+        if ($this->fileName === null) {
+            $this->fileName = config('migration-generator.file_name_template');
+            $this->fileName = str_replace('{date}', date('Y_m_d_His'), $this->fileName);
+            $this->fileName = str_replace('{table}', $this->table, $this->fileName);
+        }
 
-        return $name;
+        return $this->fileName;
     }
 
     /**
