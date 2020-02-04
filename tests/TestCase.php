@@ -77,6 +77,11 @@ abstract class TestCase extends BaseTestCase
             $table->smallInteger('smallInteger')->unsigned();
         });
 
+        $app['db']->connection()->getSchemaBuilder()->create('precisions', function (Blueprint $table) {
+            $table->decimal('decimal_8_2', 8, 2)->nullable();
+            $table->decimal('decimal_10_10', 10, 10)->nullable();
+        });
+
         $app['db']->connection()->getSchemaBuilder()->create('complete_table_nullable', function (Blueprint $table) {
             $table->bigInteger('bigIntegerNullable')->nullable();
             $table->binary('binaryNullable')->nullable();
