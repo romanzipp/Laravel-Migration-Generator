@@ -79,7 +79,7 @@ class ColumnInfoConductor
                 break;
 
             case BigIntType::class:
-                return new MigrationColumnMethod('bigInteger', [$this->column->getName(), $this->column->getPrecision()]);
+                return new MigrationColumnMethod('bigInteger', [$this->column->getName(), $this->column->getAutoincrement(), $this->column->getUnsigned()]);
 
             case BinaryType::class:
             case BlobType::class:
@@ -116,7 +116,7 @@ class ColumnInfoConductor
             case GuidType::class:
 
             case IntegerType::class:
-                return new MigrationColumnMethod('integer', [$this->column->getName(), false, $this->column->getPrecision()]);
+                return new MigrationColumnMethod('integer', [$this->column->getName(), $this->column->getAutoincrement(), $this->column->getUnsigned()]);
 
             case JsonType::class:
                 return new MigrationColumnMethod('json', [$this->column->getName()]);
@@ -128,7 +128,7 @@ class ColumnInfoConductor
                 break;
 
             case SmallIntType::class:
-                return new MigrationColumnMethod('smallInteger', [$this->column->getName()]);
+                return new MigrationColumnMethod('smallInteger', [$this->column->getName(), $this->column->getAutoincrement(), $this->column->getUnsigned()]);
 
             case StringType::class:
                 return new MigrationColumnMethod('string', [$this->column->getName()]);
