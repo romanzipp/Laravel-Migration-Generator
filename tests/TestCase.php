@@ -59,6 +59,18 @@ abstract class TestCase extends BaseTestCase
      */
     protected function setUpDatabase(Application $app)
     {
+        $app['db']->connection()->getSchemaBuilder()->create('auto_increment_integer', function (Blueprint $table) {
+            $table->integer('integer')->autoIncrement();
+        });
+
+        $app['db']->connection()->getSchemaBuilder()->create('auto_increment_big_integer', function (Blueprint $table) {
+            $table->bigInteger('bigInteger')->autoIncrement();
+        });
+
+        $app['db']->connection()->getSchemaBuilder()->create('auto_increment_small_integer', function (Blueprint $table) {
+            $table->smallInteger('smallInteger')->autoIncrement();
+        });
+
         $app['db']->connection()->getSchemaBuilder()->create('unsigned_integers', function (Blueprint $table) {
             $table->bigInteger('bigInteger')->unsigned();
             $table->integer('integer')->unsigned();
