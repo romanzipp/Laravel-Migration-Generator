@@ -96,6 +96,8 @@ class MigrationGeneratorConductor
     }
 
     /**
+     * Get the (modified) stub file contents.
+     *
      * @return string
      */
     public function getStub(): string
@@ -103,6 +105,11 @@ class MigrationGeneratorConductor
         return $this->stub;
     }
 
+    /**
+     * Generate the "up" database migration method.
+     *
+     * @return string
+     */
     public function buildUpBody(): string
     {
         $lines = [];
@@ -120,11 +127,22 @@ class MigrationGeneratorConductor
         return implode(PHP_EOL, $lines);
     }
 
+    /**
+     * Generate the "down" database migration method.
+     *
+     * @return string
+     */
     public function buildDownBody(): string
     {
         return self::IND8 . sprintf('Schema::dropIfExists(\'%s\');', $this->table);
     }
 
+    /**
+     * Shorthand string replace function for the migration stub.
+     *
+     * @param string $find
+     * @param string $replace
+     */
     private function replace(string $find, string $replace)
     {
         $this->stub = str_replace($find, $replace, $this->stub);
