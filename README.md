@@ -43,15 +43,27 @@ You will see various new migration files prefixed with the current time & date.
 
 ## Supported Databases
 
-- MySql (MariaDB)
+- MySQL (MariaDB)
 - SQLite ([Info on Datatypes](https://www.sqlite.org/datatype3.html))
 
 ## Testing
+
+### SQLite
 
 ```
 ./vendor/bin/phpunit
 ```
 
+### MySQL / MariaDB
+
+*Requires a running MySQL / MariaDB server*
+
 ```
 ./vendor/bin/phpunit -c phpunit.mysql.xml
+```
+
+#### Provide database environment variables 
+
+```
+DB_HOST=127.0.0.1 DB_USERNAME=user DB_PASSWORD=secret ./vendor/bin/phpunit -c phpunit.mysql.xml
 ```
