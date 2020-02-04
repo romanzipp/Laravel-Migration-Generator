@@ -50,7 +50,12 @@ class TablesConductor
 
     private function getTablesForMySql()
     {
-        $result = $this->connection->getSchemaBuilder()->getAllTables();
+        // Laravel 5.* support
+        if (is_callable([$this->connection->getSchemaBuilder(), 'getAllTables'])) {
+            $result = $this->connection->getSchemaBuilder()->getAllTables();
+        } else {
+            $result = $this->connection->getDoctrineSchemaManager()->listTableNames();
+        }
 
         return array_filter(
             array_map(
