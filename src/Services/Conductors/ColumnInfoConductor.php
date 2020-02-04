@@ -104,7 +104,7 @@ class ColumnInfoConductor
                 break;
 
             case DateTimeTzType::class:
-                return new MigrationColumnMethod('dateTimeTz', [$this->column->getName(), $this->column->getPrecision()]);
+                return new MigrationColumnMethod('dateTimeTz', [$this->column->getName()]);
 
             case DateType::class:
                 return new MigrationColumnMethod('date', [$this->column->getName()]);
@@ -140,7 +140,7 @@ class ColumnInfoConductor
                 break;
 
             case TimeType::class:
-                return new MigrationColumnMethod('time', [$this->column->getName(), $this->column->getPrecision()]);
+                return new MigrationColumnMethod('time', [$this->column->getName()]);
 
             case VarDateTimeImmutableType::class:
                 break;
