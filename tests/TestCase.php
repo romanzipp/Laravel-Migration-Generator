@@ -78,19 +78,19 @@ abstract class TestCase extends BaseTestCase
         });
 
         $app['db']->connection()->getSchemaBuilder()->create('complete_table_nullable', function (Blueprint $table) {
-            $table->bigInteger('bigInteger')->nullable();
-            $table->binary('binary')->nullable();
-            $table->boolean('boolean')->nullable();
-            $table->dateTime('dateTime')->nullable();
-            $table->dateTimeTz('dateTimeTz')->nullable();
-            $table->date('date')->nullable();
-            $table->decimal('decimal')->nullable();
-            $table->integer('integer')->nullable();
-            $table->json('json')->nullable();
-            $table->smallInteger('smallInteger')->nullable();
-            $table->string('string')->nullable();
-            $table->text('text')->nullable();
-            $table->time('time')->nullable();
+            $table->bigInteger('bigIntegerNullable')->nullable();
+            $table->binary('binaryNullable')->nullable();
+            $table->boolean('booleanNullable')->nullable();
+            $table->dateTime('dateTimeNullable')->nullable();
+            $table->dateTimeTz('dateTimeTzNullable')->nullable();
+            $table->date('dateNullable')->nullable();
+            $table->decimal('decimalNullable')->nullable();
+            $table->integer('integerNullable')->nullable();
+            $table->json('jsonNullable')->nullable();
+            $table->smallInteger('smallIntegerNullable')->nullable();
+            $table->string('stringNullable')->nullable();
+            $table->text('textNullable')->nullable();
+            $table->time('timeNullable')->nullable();
         });
 
         $app['db']->connection()->getSchemaBuilder()->create('complete_table', function (Blueprint $table) {
