@@ -2,6 +2,7 @@
 
 namespace romanzipp\MigrationGenerator\Tests;
 
+use Doctrine\DBAL\Types\TextType;
 use romanzipp\MigrationGenerator\Services\Conductors\ColumnsConductor;
 use romanzipp\MigrationGenerator\Services\Conductors\MigrationGeneratorConductor;
 use romanzipp\MigrationGenerator\Services\MigrationGeneratorService;
@@ -55,7 +56,12 @@ class FileExecutionTest extends TestCase
             foreach ($migration->getColumns() as $key => $originalColumn) {
 
                 $this->assertEquals($originalColumn->getType(), $newColumns[$key]->getType());
-                $this->assertEquals($originalColumn->getLength(), $newColumns[$key]->getLength());
+
+                // MariaDB
+                if ( ! $this->isMySQL() && $originalColumn->getType() instanceof TextType) {
+                    $this->assertEquals($originalColumn->getLength(), $newColumns[$key]->getLength());
+                }
+
                 $this->assertEquals($originalColumn->getPrecision(), $newColumns[$key]->getPrecision());
                 $this->assertEquals($originalColumn->getUnsigned(), $newColumns[$key]->getUnsigned());
                 $this->assertEquals($originalColumn->getFixed(), $newColumns[$key]->getFixed());
