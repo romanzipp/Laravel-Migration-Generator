@@ -3,13 +3,13 @@ language: php
 jobs:
   include:
     # ----------------- 7.2
-    - name: "7.2 SQLite"
+    - name: "PHP 7.2 + SQLite"
       php: 7.2
       env: COMPOSER_FLAGS=""                DB_CONNECTION=sqlite DB_DATABASE=':memory:'
-    - name: "7.2 SQLite lowest"
+    - name: "PHP 7.2 + SQLite + lowest"
       php: 7.2
       env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=sqlite DB_DATABASE=':memory:'
-    - name: "7.2 MySQL"
+    - name: "PHP 7.2 + MySQL"
       php: 7.2
       env: COMPOSER_FLAGS=""                DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
       services:
@@ -18,7 +18,7 @@ jobs:
         - mysql -e 'CREATE DATABASE migration_generator'
         - travis_retry composer self-update
         - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
-    - name: "7.2 MySQL lowest"
+    - name: "PHP 7.2 + MySQL + lowest"
       php: 7.2
       env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
       services:
@@ -28,13 +28,13 @@ jobs:
         - travis_retry composer self-update
         - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
     # ----------------- 7.3
-    - name: "7.3 SQLite"
+    - name: "PHP 7.3 + SQLite"
       php: 7.3
       env: COMPOSER_FLAGS=""                DB_CONNECTION=sqlite DB_DATABASE=':memory:'
-    - name: "7.3 SQLite lowest"
+    - name: "PHP 7.3 + SQLite + lowest"
       php: 7.3
       env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=sqlite DB_DATABASE=':memory:'
-    - name: "7.3 MySQL"
+    - name: "PHP 7.3 + MySQL"
       php: 7.3
       env: COMPOSER_FLAGS=""                DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
       services:
@@ -43,7 +43,7 @@ jobs:
         - mysql -e 'CREATE DATABASE migration_generator'
         - travis_retry composer self-update
         - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
-    - name: "7.3 MySQL lowest"
+    - name: "PHP 7.3 + MySQL + lowest"
       php: 7.3
       env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
       services:
@@ -53,13 +53,13 @@ jobs:
         - travis_retry composer self-update
         - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
     # ----------------- 7.4
-    - name: "7.4 SQLite"
+    - name: "PHP 7.4 + SQLite"
       php: 7.4
       env: COMPOSER_FLAGS=""                DB_CONNECTION=sqlite DB_DATABASE=':memory:'
-    - name: "7.4 SQLite lowest"
+    - name: "PHP 7.4 + SQLite + lowest"
       php: 7.4
       env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=sqlite DB_DATABASE=':memory:'
-    - name: "7.4 MySQL"
+    - name: "PHP 7.4 + MySQL"
       php: 7.4
       env: COMPOSER_FLAGS=""                DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
       services:
@@ -68,7 +68,7 @@ jobs:
         - mysql -e 'CREATE DATABASE migration_generator'
         - travis_retry composer self-update
         - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
-    - name: "7.4 MySQL lowest"
+    - name: "PHP 7.4 + MySQL + lowest"
       php: 7.4
       env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
       services:
