@@ -3,7 +3,9 @@
 namespace romanzipp\MigrationGenerator\Tests;
 
 use Illuminate\Database\Connection;
+use Illuminate\Database\MySqlConnection;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\SQLiteConnection;
 use Illuminate\Foundation\Application;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use romanzipp\MigrationGenerator\Providers\MigrationGeneratorProvider;
@@ -113,5 +115,15 @@ abstract class TestCase extends BaseTestCase
             $table->text('text');
             $table->time('time');
         });
+    }
+
+    protected function isMySQL(): bool
+    {
+        return $this->db() instanceof MySqlConnection;
+    }
+
+    protected function isSQLite(): bool
+    {
+        return $this->db() instanceof SQLiteConnection;
     }
 }
