@@ -68,6 +68,20 @@ class ColumnInfoConductor
             $methods[] = new MigrationColumnMethod('unsigned');
         }
 
+        $platformOptions = $this->column->getPlatformOptions();
+
+        if (empty($platformOptions) || ! is_array($platformOptions)) {
+            return $methods;
+        }
+
+        if (array_key_exists('charset', $platformOptions)) {
+            $methods[] = new MigrationColumnMethod('charset', [$platformOptions['charset']]);
+        }
+
+        if (array_key_exists('collation', $platformOptions)) {
+            $methods[] = new MigrationColumnMethod('collation', [$platformOptions['collation']]);
+        }
+
         return $methods;
     }
 
