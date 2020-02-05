@@ -124,7 +124,7 @@ class ColumnInfoConductor
                 return new MigrationColumnMethod('date', [$this->column->getName()]);
 
             case DecimalType::class:
-                return new MigrationColumnMethod('decimal', [$this->column->getName()]);
+                return new MigrationColumnMethod('decimal', [$this->column->getName(), $this->column->getPrecision()]);
 
             case FloatType::class:
             case GuidType::class:
