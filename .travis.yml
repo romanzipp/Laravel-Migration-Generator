@@ -41,6 +41,18 @@ jobs:
         - sudo mysql -e 'GRANT all ON *.* to travis@localhost'
         - travis_retry composer self-update
         - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+    - name: "PHP 7.2 + MariaDB + lowest"
+      php: 7.2
+      env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
+      services:
+        - mariadb
+      addons:
+        mariadb: "10.4"
+      before_script:
+        - sudo mysql -e 'CREATE DATABASE migration_generator'
+        - sudo mysql -e 'GRANT all ON *.* to travis@localhost'
+        - travis_retry composer self-update
+        - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
     # ----------------- 7.3
     - name: "PHP 7.3 + SQLite"
       php: 7.3
@@ -66,6 +78,30 @@ jobs:
         - mysql -e 'CREATE DATABASE migration_generator'
         - travis_retry composer self-update
         - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+    - name: "PHP 7.3 + MariaDB"
+      php: 7.3
+      env: COMPOSER_FLAGS=""                DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
+      services:
+        - mariadb
+      addons:
+        mariadb: "10.4"
+      before_script:
+        - sudo mysql -e 'CREATE DATABASE migration_generator'
+        - sudo mysql -e 'GRANT all ON *.* to travis@localhost'
+        - travis_retry composer self-update
+        - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+    - name: "PHP 7.3 + MariaDB + lowest"
+      php: 7.3
+      env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
+      services:
+        - mariadb
+      addons:
+        mariadb: "10.4"
+      before_script:
+        - sudo mysql -e 'CREATE DATABASE migration_generator'
+        - sudo mysql -e 'GRANT all ON *.* to travis@localhost'
+        - travis_retry composer self-update
+        - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
     # ----------------- 7.4
     - name: "PHP 7.4 + SQLite"
       php: 7.4
@@ -89,6 +125,30 @@ jobs:
         - mysql
       before_script:
         - mysql -e 'CREATE DATABASE migration_generator'
+        - travis_retry composer self-update
+        - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+    - name: "PHP 7.4 + MariaDB"
+      php: 7.4
+      env: COMPOSER_FLAGS=""                DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
+      services:
+        - mariadb
+      addons:
+        mariadb: "10.4"
+      before_script:
+        - sudo mysql -e 'CREATE DATABASE migration_generator'
+        - sudo mysql -e 'GRANT all ON *.* to travis@localhost'
+        - travis_retry composer self-update
+        - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+    - name: "PHP 7.4 + MariaDB + lowest"
+      php: 7.4
+      env: COMPOSER_FLAGS="--prefer-lowest" DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
+      services:
+        - mariadb
+      addons:
+        mariadb: "10.4"
+      before_script:
+        - sudo mysql -e 'CREATE DATABASE migration_generator'
+        - sudo mysql -e 'GRANT all ON *.* to travis@localhost'
         - travis_retry composer self-update
         - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 
