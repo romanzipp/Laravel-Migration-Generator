@@ -61,8 +61,8 @@ There are [Travis](https://travis-ci.org/romanzipp/Laravel-Migration-Generator) 
 
 - **PHP Versions**
   - 7.2
-  - 7.2
   - 7.3
+  - 7.4
 - Databases
   - SQLite
   - MySQL
