@@ -27,6 +27,17 @@ jobs:
         - mysql -e 'CREATE DATABASE migration_generator'
         - travis_retry composer self-update
         - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+    - name: "PHP 7.2 + MariaDB"
+      php: 7.2
+      env: COMPOSER_FLAGS=""                DB_CONNECTION=mysql  DB_DATABASE=migration_generator DB_HOST=127.0.0.1 DB_USERNAME=travis
+      services:
+        - mariadb
+      addons:
+        mariadb: "10.4"
+      before_script:
+        - sudo mysql -e 'CREATE DATABASE migration_generator'
+        - travis_retry composer self-update
+        - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
     # ----------------- 7.3
     - name: "PHP 7.3 + SQLite"
       php: 7.3
