@@ -38,6 +38,7 @@ jobs:
         mariadb: "10.4"
       before_script:
         - sudo mysql -e 'CREATE DATABASE migration_generator'
+        - sudo mysql -e 'GRANT all ON *.* to travis@localhost'
         - travis_retry composer self-update
         - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
     # ----------------- 7.3
