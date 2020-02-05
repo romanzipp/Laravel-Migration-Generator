@@ -70,4 +70,5 @@ DB_HOST=127.0.0.1 DB_USERNAME=user DB_PASSWORD=secret ./vendor/bin/phpunit -c ph
 
 ## Known issues
 
-- The `JSON` MySQL data type is not supported since Doctrine/DBAL interprets this as `Doctrine\DBAL\Types\TextType`
+- *MariaDB*: The `JSON` MySQL data type is not supported since Doctrine/DBAL interprets this as `Doctrine\DBAL\Types\TextType`
+- *MySQL*: Doctrine/DBAL can't differentiate between TEXT, LONGTEXT, MEDIUMTEXT
