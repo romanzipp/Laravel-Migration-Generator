@@ -43,10 +43,25 @@ You will see various new migration files prefixed with the current time & date.
 
 ## Supported Databases
 
-- MySQL (MariaDB)
+- MySQL
+- MariaDB
 - SQLite ([Info on Datatypes](https://www.sqlite.org/datatype3.html))
 
 ## Testing
+
+There are [Travis](https://travis-ci.org/romanzipp/Laravel-Migration-Generator) tests with the following matrix.
+
+- **PHP Versions**
+  - 7.2
+  - 7.2
+  - 7.3
+- Databases
+  - SQLite
+  - MySQL
+  - MariaDB
+- Composer packages
+  - latest
+  - lowest
 
 ### SQLite
 
