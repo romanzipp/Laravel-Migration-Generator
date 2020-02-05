@@ -1,5 +1,7 @@
 language: php
 
+dist: precise
+
 jobs:
   include:
     # ----------------- 7.2
