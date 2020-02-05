@@ -74,11 +74,11 @@ class ColumnInfoConductor
             return $methods;
         }
 
-        if (array_key_exists('charset', $platformOptions)) {
+        if (config('migration-generator.append_charset') && array_key_exists('charset', $platformOptions)) {
             $methods[] = new MigrationColumnMethod('charset', [$platformOptions['charset']]);
         }
 
-        if (array_key_exists('collation', $platformOptions)) {
+        if (config('migration-generator.append_collation') && array_key_exists('collation', $platformOptions)) {
             $methods[] = new MigrationColumnMethod('collation', [$platformOptions['collation']]);
         }
 

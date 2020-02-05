@@ -18,4 +18,14 @@ return [
      * - {table}  The table name
      */
     'file_name_template' => '{date}_create_{table}_table.php',
+
+    /*
+     * Weather to append the existing charset to columns.
+     */
+    'append_charset'     => true,
+
+    /*
+     * Weather to append the existing collation to columns.
+     */
+    'append_collation'   => true,
 ];
