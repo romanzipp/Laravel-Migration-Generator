@@ -47,6 +47,14 @@ You will see various new migration files prefixed with the current time & date.
 - MariaDB
 - SQLite ([Info on Datatypes](https://www.sqlite.org/datatype3.html))
 
+## Features
+
+- [x] Tables
+- [x] Columns
+- [x] Column modifiers (nullable, default, ...)
+- [ ] Indexes
+- [ ] Foreign keys
+
 ## Testing
 
 There are [Travis](https://travis-ci.org/romanzipp/Laravel-Migration-Generator) tests with the following matrix.
