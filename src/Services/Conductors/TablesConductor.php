@@ -55,7 +55,7 @@ class TablesConductor
 
             $tables = array_map(
                 function ($item) {
-                    return $item->Tables_in_migration_generator;
+                    return $item->{'Tables_in_' . $this->connection->getDatabaseName()};
                 },
                 $this->connection->getSchemaBuilder()->getAllTables()
             );
