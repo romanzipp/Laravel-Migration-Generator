@@ -76,7 +76,7 @@ class MigrationGeneratorService
     /**
      * Get all generated migrations.
      *
-     * @return MigrationGeneratorConductor[]
+     * @return PendingMigration[]
      */
     public function getMigrations(): array
     {
