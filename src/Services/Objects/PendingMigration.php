@@ -127,6 +127,7 @@ class PendingMigration
     private function generateFileName(): string
     {
         $fileName = config('migration-generator.file_name_template');
+
         $fileName = str_replace('{date}', date('Y_m_d_His'), $fileName);
         $fileName = str_replace('{table}', $this->table, $fileName);
 
