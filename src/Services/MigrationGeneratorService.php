@@ -84,6 +84,22 @@ class MigrationGeneratorService
     }
 
     /**
+     * Order migrations based on existing tables.
+     *
+     * @param string[] $tables
+     * @param PendingMigration[] $migrations
+     * @return array
+     */
+    protected function orderMigrations(array $tables, array $migrations): array
+    {
+        uasort($migrations, function (PendingMigration $a, PendingMigration $b) use ($tables) {
+            return array_search($a->getTable(), $tables);
+        });
+
+        return $migrations;
+    }
+
+    /**
      * Execute the migration generator.
      *
      * @return void
@@ -109,6 +125,8 @@ class MigrationGeneratorService
 
             $migrations[] = (new MigrationGeneratorConductor($table, $columns))->generateMigration();
         }
+
+        $this->migrations = $this->orderMigrations($tables, $migrations);
 
         $this->commandExec(function (GenerateMigrationsCommand $command) {
             $command->confirm(sprintf('Found %d Migrations. Continue?', count($this->migrations)));
