@@ -2,8 +2,8 @@
 
 namespace romanzipp\MigrationGenerator\Tests;
 
-use romanzipp\MigrationGenerator\Services\Conductors\MigrationGeneratorConductor;
 use romanzipp\MigrationGenerator\Services\MigrationGeneratorService;
+use romanzipp\MigrationGenerator\Services\Objects\PendingMigration;
 use romanzipp\MigrationGenerator\Tests\Support\Concerns\CleansUpFiles;
 
 class FileStorageConductorTest extends TestCase
@@ -24,7 +24,7 @@ class FileStorageConductorTest extends TestCase
         $service();
 
         foreach ($service->getMigrations() as $migration) {
-            /** @var MigrationGeneratorConductor $migration */
+            /** @var PendingMigration $migration */
 
             $path = self::OUTPUT_DIR . '/' . $migration->getFileName();
 

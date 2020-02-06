@@ -10,6 +10,7 @@ use romanzipp\MigrationGenerator\Services\Conductors\ColumnsConductor;
 use romanzipp\MigrationGenerator\Services\Conductors\FileStorageConductor;
 use romanzipp\MigrationGenerator\Services\Conductors\MigrationGeneratorConductor;
 use romanzipp\MigrationGenerator\Services\Conductors\TablesConductor;
+use romanzipp\MigrationGenerator\Services\Objects\PendingMigration;
 
 class MigrationGeneratorService
 {
@@ -97,13 +98,16 @@ class MigrationGeneratorService
 
         $tables = (new TablesConductor($connection))->getTables();
 
+        /** @var PendingMigration[] $migrations */
+        $migrations = [];
+
         foreach ($tables as $table) {
             /** @var string $table */
 
             /** @var \Doctrine\DBAL\Schema\Column[] $columns */
             $columns = (new ColumnsConductor($connection, $table))->getColumns();
 
-            $this->migrations[] = (new MigrationGeneratorConductor($table, $columns))();
+            $migrations[] = (new MigrationGeneratorConductor($table, $columns))->generateMigration();
         }
 
         $this->commandExec(function (GenerateMigrationsCommand $command) {

@@ -3,42 +3,43 @@
 namespace romanzipp\MigrationGenerator\Tests;
 
 use romanzipp\MigrationGenerator\Services\Conductors\MigrationGeneratorConductor;
+use romanzipp\MigrationGenerator\Services\Objects\PendingMigration;
 
 class MigrationGeneratorConductorTest extends TestCase
 {
     public function testNameBasic()
     {
-        $conductor = new MigrationGeneratorConductor('foo', []);
+        $conductor = new PendingMigration('foo', []);
         $this->assertEquals('CreateFooTable', $conductor->getClassName());
     }
 
     public function testNameUnderscore()
     {
-        $conductor = new MigrationGeneratorConductor('foo_bar', []);
+        $conductor = new PendingMigration('foo_bar', []);
         $this->assertEquals('CreateFooBarTable', $conductor->getClassName());
     }
 
     public function testNameMultipleUnderscore()
     {
-        $conductor = new MigrationGeneratorConductor('foo__bar', []);
+        $conductor = new PendingMigration('foo__bar', []);
         $this->assertEquals('CreateFooBarTable', $conductor->getClassName());
     }
 
     public function testFileNameBasic()
     {
-        $conductor = new MigrationGeneratorConductor('foo', []);
+        $conductor = new PendingMigration('foo', []);
         $this->assertRegExp('/[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_create_foo_table/', $conductor->getFileName());
     }
 
     public function testFileNameUnderscore()
     {
-        $conductor = new MigrationGeneratorConductor('foo_bar', []);
+        $conductor = new PendingMigration('foo_bar', []);
         $this->assertRegExp('/[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_create_foo_bar_table/', $conductor->getFileName());
     }
 
     public function testFileNameMultipleUnderscore()
     {
-        $conductor = new MigrationGeneratorConductor('foo__bar', []);
+        $conductor = new PendingMigration('foo__bar', []);
         $this->assertRegExp('/[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_create_foo__bar_table/', $conductor->getFileName());
     }
 
@@ -46,7 +47,7 @@ class MigrationGeneratorConductorTest extends TestCase
     {
         $this->assertEquals(
             'Schema::dropIfExists(\'foo\');',
-            trim((new MigrationGeneratorConductor('foo', []))->buildDownBody())
+            trim((new PendingMigration('foo', []))->buildDownBody())
         );
     }
 
@@ -54,7 +55,7 @@ class MigrationGeneratorConductorTest extends TestCase
     {
         $this->assertEquals(
             'Schema::dropIfExists(\'foo_bar\');',
-            trim((new MigrationGeneratorConductor('foo_bar', []))->buildDownBody())
+            trim((new PendingMigration('foo_bar', []))->buildDownBody())
         );
     }
 
@@ -62,7 +63,7 @@ class MigrationGeneratorConductorTest extends TestCase
     {
         $this->assertEquals(
             'Schema::dropIfExists(\'foo__bar\');',
-            trim((new MigrationGeneratorConductor('foo__bar', []))->buildDownBody())
+            trim((new PendingMigration('foo__bar', []))->buildDownBody())
         );
     }
 }

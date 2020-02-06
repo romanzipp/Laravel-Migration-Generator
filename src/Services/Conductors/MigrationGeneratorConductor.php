@@ -2,16 +2,10 @@
 
 namespace romanzipp\MigrationGenerator\Services\Conductors;
 
-use Illuminate\Support\Str;
+use romanzipp\MigrationGenerator\Services\Objects\PendingMigration;
 
 class MigrationGeneratorConductor
 {
-    const STUB = __DIR__ . '/../../../stubs/migration.stub';
-
-    const IND4 = '    ';
-    const IND8 = '        ';
-    const IND12 = '            ';
-
     /**
      * @var string
      */
@@ -22,31 +16,23 @@ class MigrationGeneratorConductor
      */
     private $columns;
 
-    /**
-     * @var string
-     */
-    private $stub;
-
-    /**
-     * @var string
-     */
-    private $fileName;
-
     public function __construct(string $table, array $columns)
     {
         $this->table = $table;
         $this->columns = $columns;
     }
 
-    public function __invoke()
+    /**
+     * Create a new migration instance.
+     *
+     * @return PendingMigration
+     */
+    public function generateMigration(): PendingMigration
     {
-        $this->stub = file_get_contents(self::STUB);
-
-        $this->replace('{TABLE}', $this->getClassName());
-        $this->replace('{UP_BODY}', $this->buildUpBody());
-        $this->replace('{DOWN_BODY}', $this->buildDownBody());
-
-        return $this;
+        return new PendingMigration(
+            $this->table,
+            $this->columns
+        );
     }
 
     /**
@@ -67,84 +53,5 @@ class MigrationGeneratorConductor
     public function getTable(): string
     {
         return $this->table;
-    }
-
-    /**
-     * Generate the migration class name.
-     *
-     * @return string
-     */
-    public function getClassName(): string
-    {
-        return 'Create' . ucfirst(Str::camel($this->table)) . 'Table';
-    }
-
-    /**
-     * Generate the migration file name.
-     *
-     * @return string
-     */
-    public function getFileName(): string
-    {
-        if ($this->fileName === null) {
-            $this->fileName = config('migration-generator.file_name_template');
-            $this->fileName = str_replace('{date}', date('Y_m_d_His'), $this->fileName);
-            $this->fileName = str_replace('{table}', $this->table, $this->fileName);
-        }
-
-        return $this->fileName;
-    }
-
-    /**
-     * Get the (modified) stub file contents.
-     *
-     * @return string
-     */
-    public function getStub(): string
-    {
-        return $this->stub;
-    }
-
-    /**
-     * Generate the "up" database migration method.
-     *
-     * @return string
-     */
-    public function buildUpBody(): string
-    {
-        $lines = [];
-
-        $lines[] = self::IND8 . sprintf('Schema::create(\'%s\', function (Blueprint $table) {', $this->table);
-
-        foreach ($this->columns as $column) {
-
-            $info = new ColumnInfoConductor($column);
-            $lines[] = self::IND12 . $info();
-        }
-
-        $lines[] = self::IND8 . '});';
-
-        return implode(PHP_EOL, $lines);
-    }
-
-    /**
-     * Generate the "down" database migration method.
-     *
-     * @return string
-     */
-    public function buildDownBody(): string
-    {
-        return self::IND8 . sprintf('Schema::dropIfExists(\'%s\');', $this->table);
-    }
-
-    /**
-     * Shorthand string replace function for the migration stub.
-     *
-     * @param string $find
-     * @param string $replace
-     */
-    private function replace(string $find, string $replace)
-    {
-        $this->stub = str_replace($find, $replace, $this->stub);
     }
 }

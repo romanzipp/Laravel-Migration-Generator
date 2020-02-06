@@ -5,7 +5,7 @@ namespace romanzipp\MigrationGenerator\Services\Conductors;
 class FileStorageConductor
 {
     /**
-     * @var \romanzipp\MigrationGenerator\Services\Conductors\MigrationGeneratorConductor[]
+     * @var \romanzipp\MigrationGenerator\Services\Objects\PendingMigration[]
      */
     private $migrations;
 
