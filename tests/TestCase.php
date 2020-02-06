@@ -88,9 +88,10 @@ abstract class TestCase extends BaseTestCase
             $table->bigInteger('bigIntegerNullable')->nullable();
             $table->binary('binaryNullable')->nullable();
             $table->boolean('booleanNullable')->nullable();
+            $table->char('charNullable')->nullable();
+            $table->date('dateNullable')->nullable();
             $table->dateTime('dateTimeNullable')->nullable();
             $table->dateTimeTz('dateTimeTzNullable')->nullable();
-            $table->date('dateNullable')->nullable();
             $table->decimal('decimalNullable')->nullable();
             $table->integer('integerNullable')->nullable();
             $table->json('jsonNullable')->nullable();
@@ -104,9 +105,10 @@ abstract class TestCase extends BaseTestCase
             $table->bigInteger('bigInteger');
             $table->binary('binary');
             $table->boolean('boolean');
+            $table->char('char');
+            $table->date('date');
             $table->dateTime('dateTime');
             $table->dateTimeTz('dateTimeTz');
-            $table->date('date');
             $table->decimal('decimal');
             $table->integer('integer');
             $table->json('json');

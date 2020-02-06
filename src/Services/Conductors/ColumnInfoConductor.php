@@ -145,6 +145,11 @@ class ColumnInfoConductor
                 return new MigrationColumnMethod('smallInteger', [$this->column->getName(), $this->column->getAutoincrement(), $this->column->getUnsigned()]);
 
             case StringType::class:
+
+                if ($this->column->getFixed() === true) {
+                    return new MigrationColumnMethod('char', [$this->column->getName(), $this->column->getLength()]);
+                }
+
                 return new MigrationColumnMethod('string', [$this->column->getName()]);
 
             case TextType::class:
