@@ -23,7 +23,7 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        config(['migration-generator.path' => __DIR__ . '/Support/files']);
+        config(['migration-generator.output_path' => __DIR__ . '/Support/files']);
 
         $this->artisan('migrate:fresh')->run();
 
