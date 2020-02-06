@@ -31,10 +31,10 @@ class ColumnsConductor
     {
         $columns = [];
 
-        $result = $this->connection->getSchemaBuilder()->getColumnListing($this->table);
+        $result = $this->connection->getDoctrineSchemaManager()->listTableColumns($this->table);
 
         foreach ($result as $key => $column) {
-            $columns[] = $this->connection->getDoctrineColumn($this->table, $column);
+            $columns[] = $column;
         }
 
         return $columns;
