@@ -44,6 +44,8 @@ class ColumnInfoConductor
     }
 
     /**
+     * Get all methods as array for a single column.
+     *
      * @return MigrationColumnMethod[]
      */
     public function getChainedMethods(): array
@@ -85,6 +87,11 @@ class ColumnInfoConductor
         return $methods;
     }
 
+    /**
+     * Get initial column method.
+     *
+     * @return MigrationColumnMethod|null
+     */
     public function getMethod(): ?MigrationColumnMethod
     {
         switch (get_class($this->column->getType())) {
@@ -171,6 +178,13 @@ class ColumnInfoConductor
         return null;
     }
 
+    /**
+     * Build the method signature string.
+     *
+     * @param string $name
+     * @param array $parameters
+     * @return string
+     */
     public function buildMethodSignature(string $name, array $parameters)
     {
         $method = '->';
