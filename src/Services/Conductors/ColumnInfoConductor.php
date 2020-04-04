@@ -63,7 +63,12 @@ class ColumnInfoConductor
         }
 
         if ($this->column->getDefault() !== null) {
-            $methods[] = new MigrationColumnMethod('default', [$this->column->getDefault()]);
+
+            if ($this->column->getDefault() === 'CURRENT_TIMESTAMP') {
+                $methods[] = new MigrationColumnMethod('useCurrent');
+            } else {
+                $methods[] = new MigrationColumnMethod('default', [$this->column->getDefault()]);
+            }
         }
 
         if ($this->column->getUnsigned() === true) {

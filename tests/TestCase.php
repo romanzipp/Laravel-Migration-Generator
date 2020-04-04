@@ -144,6 +144,10 @@ abstract class TestCase extends BaseTestCase
             $table->decimal('decimal_10_10', 10, 10)->nullable();
         });
 
+        $app['db']->connection()->getSchemaBuilder()->create('defaults', function (Blueprint $table) {
+            $table->timestamp('use_current')->useCurrent();
+        });
+
         $app['db']->connection()->getSchemaBuilder()->create('complete_table_nullable', function (Blueprint $table) {
             $table->bigInteger('bigIntegerNullable')->nullable();
             $table->binary('binaryNullable')->nullable();
