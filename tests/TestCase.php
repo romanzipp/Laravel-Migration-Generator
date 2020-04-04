@@ -148,6 +148,11 @@ abstract class TestCase extends BaseTestCase
             $table->timestamp('use_current')->useCurrent();
         });
 
+        $app['db']->connection()->getSchemaBuilder()->create('uuids', function (Blueprint $table) {
+            $table->uuid('default_uuid');
+            $table->uuid('nullable_uuid')->nullable();
+        });
+
         $app['db']->connection()->getSchemaBuilder()->create('complete_table_nullable', function (Blueprint $table) {
             $table->bigInteger('bigIntegerNullable')->nullable();
             $table->binary('binaryNullable')->nullable();

@@ -158,11 +158,16 @@ class ColumnInfoConductor
 
             case StringType::class:
 
-                if ($this->column->getFixed() === true) {
-                    return new MigrationColumnMethod('char', [$this->column->getName(), $this->column->getLength()]);
+                if ($this->column->getFixed() === false) {
+                    return new MigrationColumnMethod('string', [$this->column->getName()]);
                 }
 
-                return new MigrationColumnMethod('string', [$this->column->getName()]);
+                // Char type & length of 36 is most likely UUID
+                if ($this->column->getLength() === 36) {
+                    return new MigrationColumnMethod('uuid', [$this->column->getName()]);
+                }
+
+                return new MigrationColumnMethod('char', [$this->column->getName(), $this->column->getLength()]);
 
             case TextType::class:
                 return new MigrationColumnMethod('text', [$this->column->getName()]);
