@@ -49,7 +49,7 @@ jobs:
         run: vendor/bin/phpunit
         env:
           DB_CONNECTION: mysql
-          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+          DB_PORT: ${{ job.services.mariadb.ports[3306] }}
           DB_DATABASE: migration_generator
           DB_USERNAME: root
           DB_PASSWORD: test
