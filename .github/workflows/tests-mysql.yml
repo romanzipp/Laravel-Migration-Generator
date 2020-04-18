@@ -1,0 +1,55 @@
+name: Tests MySQL
+
+on:
+
+  push:
+    branches:
+      - '*'
+
+  pull_request:
+    branches:
+      - '*'
+
+services:
+
+  mysql:
+    image: mysql:5.7
+    env:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE: migration_generator
+    ports:
+      - 3306
+    options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+jobs:
+  test:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [7.2, 7.3, 7.4]
+        composer-dependency: [prefer-stable, prefer-lowest]
+
+    name: "MySQL - PHP ${{ matrix.php }} - ${{ matrix.composer-dependency }}"
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: nanasess/setup-php@master
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Install dependencies
+        run: composer update --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --${{ matrix.composer-dependency }}
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
+        env:
+          DB_CONNECTION: mysql
+          DB_DATABASE: migration_generator
+          DB_HOST: 127.0.0.1
+          DB_USERNAME: travis
