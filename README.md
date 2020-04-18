@@ -59,17 +59,17 @@ You will see various new migration files prefixed with the current time & date.
 
 ## Testing
 
-There are [Travis](https://travis-ci.org/romanzipp/Laravel-Migration-Generator) tests with the following matrix.
+There are [tests](https://github.com/romanzipp/Laravel-Migration-Generator/actions) with the following matrix.
 
-- **PHP Versions**
+- **PHP**
   - 7.2
   - 7.3
   - 7.4
-- Databases
+- **Databases**
   - SQLite
   - MySQL
   - MariaDB
-- Composer packages
+- **Composer dependency versions**
   - latest
   - lowest
 
