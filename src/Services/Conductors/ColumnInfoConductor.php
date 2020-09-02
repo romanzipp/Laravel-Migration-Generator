@@ -3,32 +3,7 @@
 namespace romanzipp\MigrationGenerator\Services\Conductors;
 
 use Doctrine\DBAL\Schema\Column;
-use Doctrine\DBAL\Types\ArrayType;
-use Doctrine\DBAL\Types\BigIntType;
-use Doctrine\DBAL\Types\BinaryType;
-use Doctrine\DBAL\Types\BlobType;
-use Doctrine\DBAL\Types\BooleanType;
-use Doctrine\DBAL\Types\DateImmutableType;
-use Doctrine\DBAL\Types\DateIntervalType;
-use Doctrine\DBAL\Types\DateTimeImmutableType;
-use Doctrine\DBAL\Types\DateTimeType;
-use Doctrine\DBAL\Types\DateTimeTzImmutableType;
-use Doctrine\DBAL\Types\DateTimeTzType;
-use Doctrine\DBAL\Types\DateType;
-use Doctrine\DBAL\Types\DecimalType;
-use Doctrine\DBAL\Types\FloatType;
-use Doctrine\DBAL\Types\GuidType;
-use Doctrine\DBAL\Types\IntegerType;
-use Doctrine\DBAL\Types\JsonType;
-use Doctrine\DBAL\Types\ObjectType;
-use Doctrine\DBAL\Types\SimpleArrayType;
-use Doctrine\DBAL\Types\SmallIntType;
-use Doctrine\DBAL\Types\StringType;
-use Doctrine\DBAL\Types\TextType;
-use Doctrine\DBAL\Types\TimeImmutableType;
-use Doctrine\DBAL\Types\TimeType;
-use Doctrine\DBAL\Types\VarDateTimeImmutableType;
-use Doctrine\DBAL\Types\VarDateTimeType;
+use Doctrine\DBAL\Types;
 use romanzipp\MigrationGenerator\Services\Objects\MigrationColumnMethod;
 
 class ColumnInfoConductor
@@ -101,62 +76,62 @@ class ColumnInfoConductor
     {
         switch (get_class($this->column->getType())) {
 
-            case ArrayType::class:
+            case Types\ArrayType::class:
                 break;
 
-            case BigIntType::class:
+            case Types\BigIntType::class:
                 return new MigrationColumnMethod('bigInteger', [$this->column->getName(), $this->column->getAutoincrement(), $this->column->getUnsigned()]);
 
-            case BinaryType::class:
-            case BlobType::class:
+            case Types\BinaryType::class:
+            case Types\BlobType::class:
                 return new MigrationColumnMethod('binary', [$this->column->getName()]);
 
-            case BooleanType::class:
+            case Types\BooleanType::class:
                 return new MigrationColumnMethod('boolean', [$this->column->getName()]);
 
-            case DateImmutableType::class:
+            case Types\DateImmutableType::class:
                 break;
 
-            case DateIntervalType::class:
+            case Types\DateIntervalType::class:
                 break;
 
-            case DateTimeImmutableType::class:
+            case Types\DateTimeImmutableType::class:
                 break;
 
-            case DateTimeType::class:
+            case Types\DateTimeType::class:
                 return new MigrationColumnMethod('dateTime', [$this->column->getName()]);
 
-            case DateTimeTzImmutableType::class:
+            case Types\DateTimeTzImmutableType::class:
                 break;
 
-            case DateTimeTzType::class:
+            case Types\DateTimeTzType::class:
                 return new MigrationColumnMethod('dateTimeTz', [$this->column->getName()]);
 
-            case DateType::class:
+            case Types\DateType::class:
                 return new MigrationColumnMethod('date', [$this->column->getName()]);
 
-            case DecimalType::class:
+            case Types\DecimalType::class:
                 return new MigrationColumnMethod('decimal', [$this->column->getName(), $this->column->getPrecision()]);
 
-            case FloatType::class:
-            case GuidType::class:
+            case Types\FloatType::class:
+            case Types\GuidType::class:
 
-            case IntegerType::class:
+            case Types\IntegerType::class:
                 return new MigrationColumnMethod('integer', [$this->column->getName(), $this->column->getAutoincrement(), $this->column->getUnsigned()]);
 
-            case JsonType::class:
+            case Types\JsonType::class:
                 return new MigrationColumnMethod('json', [$this->column->getName()]);
 
-            case ObjectType::class:
+            case Types\ObjectType::class:
                 break;
 
-            case SimpleArrayType::class:
+            case Types\SimpleArrayType::class:
                 break;
 
-            case SmallIntType::class:
+            case Types\SmallIntType::class:
                 return new MigrationColumnMethod('smallInteger', [$this->column->getName(), $this->column->getAutoincrement(), $this->column->getUnsigned()]);
 
-            case StringType::class:
+            case Types\StringType::class:
 
                 if ($this->column->getFixed() === false) {
                     return new MigrationColumnMethod('string', [$this->column->getName()]);
@@ -169,19 +144,19 @@ class ColumnInfoConductor
 
                 return new MigrationColumnMethod('char', [$this->column->getName(), $this->column->getLength()]);
 
-            case TextType::class:
+            case Types\TextType::class:
                 return new MigrationColumnMethod('text', [$this->column->getName()]);
 
-            case TimeImmutableType::class:
+            case Types\TimeImmutableType::class:
                 break;
 
-            case TimeType::class:
+            case Types\TimeType::class:
                 return new MigrationColumnMethod('time', [$this->column->getName()]);
 
-            case VarDateTimeImmutableType::class:
+            case Types\VarDateTimeImmutableType::class:
                 break;
 
-            case VarDateTimeType::class:
+            case Types\VarDateTimeType::class:
                 break;
         }
 
