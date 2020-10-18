@@ -30,7 +30,6 @@ class FileExecutionTest extends TestCase
 
         foreach ($service->getMigrations() as $migration) {
             /** @var MigrationGeneratorConductor $migration */
-
             $path = self::OUTPUT_DIR . '/' . $migration->getFileName();
 
             require $path;

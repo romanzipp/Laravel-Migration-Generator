@@ -74,7 +74,6 @@ class ColumnInfoConductor
     public function getMethod(): ?MigrationColumnMethod
     {
         switch (get_class($this->column->getType())) {
-
             case Types\ArrayType::class:
                 break;
 
@@ -167,6 +166,7 @@ class ColumnInfoConductor
      *
      * @param string $name
      * @param array $parameters
+     *
      * @return string
      */
     public function buildMethodSignature(string $name, array $parameters)
