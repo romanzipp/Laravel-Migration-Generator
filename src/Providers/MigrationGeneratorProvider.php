@@ -27,7 +27,8 @@ class MigrationGeneratorProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/../config/migration-generator.php', 'migration-generator'
+            dirname(__DIR__) . '/../config/migration-generator.php',
+            'migration-generator'
         );
 
         $this->commands([

@@ -106,7 +106,7 @@ class MigrationGeneratorService
      */
     public function __invoke(): void
     {
-        if ($this->connection === null) {
+        if (null === $this->connection) {
             $this->connection = config('migration-generator.connection');
         }
 

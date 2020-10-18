@@ -29,24 +29,23 @@ class ColumnInfoConductor
 
         $methods[] = $this->getMethod();
 
-        if ($this->column->getNotnull() === false) {
+        if (false === $this->column->getNotnull()) {
             $methods[] = new MigrationColumnMethod('nullable');
         }
 
-        if ($this->column->getComment() !== null) {
+        if (null !== $this->column->getComment()) {
             $methods[] = new MigrationColumnMethod('comment', [$this->column->getComment()]);
         }
 
-        if ($this->column->getDefault() !== null) {
-
-            if ($this->column->getDefault() === 'CURRENT_TIMESTAMP') {
+        if (null !== $this->column->getDefault()) {
+            if ('CURRENT_TIMESTAMP' === $this->column->getDefault()) {
                 $methods[] = new MigrationColumnMethod('useCurrent');
             } else {
                 $methods[] = new MigrationColumnMethod('default', [$this->column->getDefault()]);
             }
         }
 
-        if ($this->column->getUnsigned() === true) {
+        if (true === $this->column->getUnsigned()) {
             $methods[] = new MigrationColumnMethod('unsigned');
         }
 
@@ -133,12 +132,12 @@ class ColumnInfoConductor
 
             case Types\StringType::class:
 
-                if ($this->column->getFixed() === false) {
+                if (false === $this->column->getFixed()) {
                     return new MigrationColumnMethod('string', [$this->column->getName()]);
                 }
 
                 // Char type & length of 36 is most likely UUID
-                if ($this->column->getLength() === 36) {
+                if (36 === $this->column->getLength()) {
                     return new MigrationColumnMethod('uuid', [$this->column->getName()]);
                 }
 
@@ -177,7 +176,6 @@ class ColumnInfoConductor
         $method .= '(';
 
         foreach ($parameters as $index => $parameter) {
-
             if (is_bool($parameter)) {
                 $method .= $parameter ? 'true' : 'false';
             } elseif (is_string($parameter)) {
@@ -201,8 +199,7 @@ class ColumnInfoConductor
         $line = '$table';
 
         foreach ($this->getChainedMethods() as $method) {
-
-            if ($method == null) {
+            if (null == $method) {
                 continue;
             }
 
