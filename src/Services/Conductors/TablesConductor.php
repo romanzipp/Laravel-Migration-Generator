@@ -52,14 +52,12 @@ class TablesConductor
     {
         // Laravel 5.* support
         if (is_callable([$this->connection->getSchemaBuilder(), 'getAllTables'])) {
-
             $tables = array_map(
                 function ($item) {
                     return $item->{'Tables_in_' . $this->connection->getDatabaseName()};
                 },
                 $this->connection->getSchemaBuilder()->getAllTables()
             );
-
         } else {
             $tables = $this->connection->getDoctrineSchemaManager()->listTableNames();
         }

@@ -2,7 +2,6 @@
 
 namespace romanzipp\MigrationGenerator\Tests;
 
-use romanzipp\MigrationGenerator\Services\Conductors\MigrationGeneratorConductor;
 use romanzipp\MigrationGenerator\Services\Objects\PendingMigration;
 
 class MigrationGeneratorConductorTest extends TestCase

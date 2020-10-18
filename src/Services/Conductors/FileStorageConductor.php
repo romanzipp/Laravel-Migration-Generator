@@ -17,7 +17,6 @@ class FileStorageConductor
     public function __invoke()
     {
         foreach ($this->migrations as $migration) {
-
             $path = sprintf('%s/%s', config('migration-generator.output_path'), $migration->getFileName());
 
             file_put_contents(

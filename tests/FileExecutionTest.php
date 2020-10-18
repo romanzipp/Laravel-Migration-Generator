@@ -37,7 +37,7 @@ class FileExecutionTest extends TestCase
 
             $class = $migration->getClassName();
 
-            (new $class)->up();
+            (new $class())->up();
 
             $this->assertTrue(
                 $builder->hasTable(
@@ -54,7 +54,6 @@ class FileExecutionTest extends TestCase
             );
 
             foreach ($migration->getColumns() as $key => $originalColumn) {
-
                 $this->assertEquals($originalColumn->getType(), $newColumns[$key]->getType());
 
                 // MariaDB

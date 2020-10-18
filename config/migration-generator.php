@@ -4,12 +4,12 @@ return [
     /*
      * The database connection to be used.
      */
-    'connection'         => null,
+    'connection' => null,
 
     /*
      * Where to store new generated migration files.
      */
-    'output_path'        => database_path('migrations'),
+    'output_path' => database_path('migrations'),
 
     /*
      * How to name new created files.
@@ -22,10 +22,10 @@ return [
     /*
      * Weather to append the existing charset to columns.
      */
-    'append_charset'     => true,
+    'append_charset' => true,
 
     /*
      * Weather to append the existing collation to columns.
      */
-    'append_collation'   => true,
+    'append_collation' => true,
 ];

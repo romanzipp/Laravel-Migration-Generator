@@ -18,14 +18,13 @@ class MigrationColumnMethod
 
     private static function simplify(string $name, array $parameters): ?array
     {
-        if ($name === 'bigInteger') {
-
+        if ('bigInteger' === $name) {
             if (count($parameters) < 3) {
                 return null;
             }
 
             // Auto increment & unsigned
-            if ($parameters[1] === true && $parameters[2] === true) {
+            if (true === $parameters[1] && true === $parameters[2]) {
                 return [
                     'bigIncrements',
                     [

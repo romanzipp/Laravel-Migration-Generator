@@ -83,7 +83,6 @@ class PendingMigration
         $lines[] = self::IND8 . sprintf('Schema::create(\'%s\', function (Blueprint $table) {', $this->table);
 
         foreach ($this->columns as $column) {
-
             $info = new ColumnInfoConductor($column);
             $lines[] = self::IND12 . $info();
         }
@@ -104,7 +103,7 @@ class PendingMigration
     }
 
     /**
-     * Generate the stub
+     * Generate the stub.
      *
      * @return string
      */

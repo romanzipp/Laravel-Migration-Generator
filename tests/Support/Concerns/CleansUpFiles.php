@@ -9,10 +9,9 @@ trait CleansUpFiles
         $files = scandir(self::OUTPUT_DIR);
 
         foreach ($files as $file) {
-
             $filePath = self::OUTPUT_DIR . '/' . $file;
 
-            if (pathinfo($filePath, PATHINFO_EXTENSION) !== 'php') {
+            if ('php' !== pathinfo($filePath, PATHINFO_EXTENSION)) {
                 continue;
             }
 
