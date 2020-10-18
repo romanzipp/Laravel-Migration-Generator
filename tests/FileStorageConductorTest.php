@@ -25,7 +25,6 @@ class FileStorageConductorTest extends TestCase
 
         foreach ($service->getMigrations() as $migration) {
             /** @var PendingMigration $migration */
-
             $path = self::OUTPUT_DIR . '/' . $migration->getFileName();
 
             $this->assertFileExists($path);

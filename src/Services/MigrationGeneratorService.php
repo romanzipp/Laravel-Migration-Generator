@@ -41,6 +41,7 @@ class MigrationGeneratorService
 
     /**
      * @param string $connection
+     *
      * @return $this
      */
     public function connection(string $connection): self
@@ -54,6 +55,7 @@ class MigrationGeneratorService
      * Set the executing command to enable cli logging.
      *
      * @param \romanzipp\MigrationGenerator\Console\Commands\GenerateMigrationsCommand $command
+     *
      * @return $this
      */
     public function command(GenerateMigrationsCommand $command): self
@@ -88,6 +90,7 @@ class MigrationGeneratorService
      *
      * @param string[] $tables
      * @param PendingMigration[] $migrations
+     *
      * @return array
      */
     protected function orderMigrations(array $tables, array $migrations): array
