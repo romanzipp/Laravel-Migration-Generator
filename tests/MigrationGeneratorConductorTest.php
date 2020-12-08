@@ -27,19 +27,19 @@ class MigrationGeneratorConductorTest extends TestCase
     public function testFileNameBasic()
     {
         $conductor = new PendingMigration('foo', []);
-        $this->assertRegExp('/[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_create_foo_table/', $conductor->getFileName());
+        $this->assertMatchesRegularExpression('/[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_create_foo_table/', $conductor->getFileName());
     }
 
     public function testFileNameUnderscore()
     {
         $conductor = new PendingMigration('foo_bar', []);
-        $this->assertRegExp('/[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_create_foo_bar_table/', $conductor->getFileName());
+        $this->assertMatchesRegularExpression('/[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_create_foo_bar_table/', $conductor->getFileName());
     }
 
     public function testFileNameMultipleUnderscore()
     {
         $conductor = new PendingMigration('foo__bar', []);
-        $this->assertRegExp('/[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_create_foo__bar_table/', $conductor->getFileName());
+        $this->assertMatchesRegularExpression('/[0-9]{4}_[0-9]{2}_[0-9]{2}_[0-9]{6}_create_foo__bar_table/', $conductor->getFileName());
     }
 
     public function testBuildDownBodyBasic()
