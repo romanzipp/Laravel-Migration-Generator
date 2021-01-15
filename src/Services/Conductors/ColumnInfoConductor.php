@@ -113,7 +113,6 @@ class ColumnInfoConductor
 
             case Types\FloatType::class:
             case Types\GuidType::class:
-
             case Types\IntegerType::class:
                 return new MigrationColumnMethod('integer', [$this->column->getName(), $this->column->getAutoincrement(), $this->column->getUnsigned()]);
 
@@ -130,7 +129,6 @@ class ColumnInfoConductor
                 return new MigrationColumnMethod('smallInteger', [$this->column->getName(), $this->column->getAutoincrement(), $this->column->getUnsigned()]);
 
             case Types\StringType::class:
-
                 if (false === $this->column->getFixed()) {
                     return new MigrationColumnMethod('string', [$this->column->getName()]);
                 }
