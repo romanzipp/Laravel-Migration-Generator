@@ -7,11 +7,11 @@ use romanzipp\MigrationGenerator\Services\Conductors\ColumnInfoConductor;
 
 class PendingMigration
 {
-    const STUB = __DIR__ . '/../../../stubs/migration.stub';
+    public const STUB = __DIR__ . '/../../../stubs/migration.stub';
 
-    const IND4 = '    ';
-    const IND8 = '        ';
-    const IND12 = '            ';
+    public const IND4 = '    ';
+    public const IND8 = '        ';
+    public const IND12 = '            ';
 
     /**
      * @var string

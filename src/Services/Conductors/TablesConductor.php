@@ -9,11 +9,11 @@ use LogicException;
 
 class TablesConductor
 {
-    const LARAVEL_TABLES = [
+    public const LARAVEL_TABLES = [
         'migrations',
     ];
 
-    const SYSTEM_TABLES_SQLITE = [
+    public const SYSTEM_TABLES_SQLITE = [
         'sqlite_master',
         'sqlite_sequence',
         'sqlite_stat1',

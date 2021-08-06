@@ -12,7 +12,7 @@ use romanzipp\MigrationGenerator\Providers\MigrationGeneratorProvider;
 
 abstract class TestCase extends BaseTestCase
 {
-    const OUTPUT_DIR = __DIR__ . '/Support/files';
+    public const OUTPUT_DIR = __DIR__ . '/Support/files';
 
     /**
      * Setup the test environment.
