@@ -19,7 +19,7 @@ class PendingMigration
     private $table;
 
     /**
-     * @var array
+     * @var \Doctrine\DBAL\Schema\Column[]
      */
     private $columns;
 
@@ -33,6 +33,10 @@ class PendingMigration
      */
     private $fileName;
 
+    /**
+     * @param string $table
+     * @param \Doctrine\DBAL\Schema\Column[] $columns
+     */
     public function __construct(string $table, array $columns)
     {
         $this->table = $table;
@@ -46,6 +50,9 @@ class PendingMigration
         return $this->table;
     }
 
+    /**
+     * @return \Doctrine\DBAL\Schema\Column[]
+     */
     public function getColumns(): array
     {
         return $this->columns;

@@ -9,12 +9,15 @@ class FileStorageConductor
      */
     private $migrations;
 
+    /**
+     * @param \romanzipp\MigrationGenerator\Services\Objects\PendingMigration[] $migrations
+     */
     public function __construct(array $migrations)
     {
         $this->migrations = $migrations;
     }
 
-    public function __invoke()
+    public function __invoke(): void
     {
         foreach ($this->migrations as $migration) {
             $path = sprintf('%s/%s', config('migration-generator.output_path'), $migration->getFileName());

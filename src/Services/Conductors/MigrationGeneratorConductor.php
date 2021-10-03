@@ -16,6 +16,10 @@ class MigrationGeneratorConductor
      */
     private $columns;
 
+    /**
+     * @param string $table
+     * @param \Doctrine\DBAL\Schema\Column[] $columns
+     */
     public function __construct(string $table, array $columns)
     {
         $this->table = $table;

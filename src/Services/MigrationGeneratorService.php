@@ -25,12 +25,12 @@ class MigrationGeneratorService
     private $connection = null;
 
     /**
-     * @var array
+     * @var \romanzipp\MigrationGenerator\Services\Objects\PendingMigration[]
      */
     private $migrations = [];
 
     /**
-     * @var GenerateMigrationsCommand
+     * @var \romanzipp\MigrationGenerator\Console\Commands\GenerateMigrationsCommand
      */
     private $command;
 
@@ -78,7 +78,7 @@ class MigrationGeneratorService
     /**
      * Get all generated migrations.
      *
-     * @return PendingMigration[]
+     * @return \romanzipp\MigrationGenerator\Services\Objects\PendingMigration[]
      */
     public function getMigrations(): array
     {
@@ -89,9 +89,9 @@ class MigrationGeneratorService
      * Order migrations based on existing tables.
      *
      * @param string[] $tables
-     * @param PendingMigration[] $migrations
+     * @param \romanzipp\MigrationGenerator\Services\Objects\PendingMigration[] $migrations
      *
-     * @return array
+     * @return \romanzipp\MigrationGenerator\Services\Objects\PendingMigration[]
      */
     protected function orderMigrations(array $tables, array $migrations): array
     {
@@ -144,7 +144,7 @@ class MigrationGeneratorService
 
     private function commandExec(Closure $callback): void
     {
-        if ( ! $this->command) {
+        if ( ! isset($this->command)) {
             return;
         }
 

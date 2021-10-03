@@ -19,6 +19,9 @@ class TablesConductor
         'sqlite_stat1',
     ];
 
+    /**
+     * @var \Illuminate\Database\Connection
+     */
     private $connection;
 
     public function __construct(Connection $connection)
@@ -26,12 +29,18 @@ class TablesConductor
         $this->connection = $connection;
     }
 
+    /**
+     * @return string[]
+     */
     public function getTables(): array
     {
         return array_values($this->getTablesByConnection());
     }
 
-    private function getTablesByConnection()
+    /**
+     * @return string[]
+     */
+    private function getTablesByConnection(): array
     {
         if ($this->connection instanceof SQLiteConnection) {
             return $this->getTablesForSQLite();
@@ -42,13 +51,17 @@ class TablesConductor
         }
 
         try {
+            /** @phpstan-ignore-next-line */
             return $this->connection->getSchemaBuilder()->getAllTables();
         } catch (LogicException $e) {
             return [];
         }
     }
 
-    private function getTablesForMySql()
+    /**
+     * @return string[]
+     */
+    private function getTablesForMySql(): array
     {
         // Laravel 5.* support
         if (is_callable([$this->connection->getSchemaBuilder(), 'getAllTables'])) {
@@ -56,8 +69,10 @@ class TablesConductor
                 function ($item) {
                     return $item->{'Tables_in_' . $this->connection->getDatabaseName()};
                 },
+                /** @phpstan-ignore-next-line */
                 $this->connection->getSchemaBuilder()->getAllTables()
             );
+            /** @phpstan-ignore-next-line */
         } else {
             $tables = $this->connection->getDoctrineSchemaManager()->listTableNames();
         }
@@ -70,6 +85,9 @@ class TablesConductor
         );
     }
 
+    /**
+     * @return string[]
+     */
     private function getTablesForSQLite(): array
     {
         $result = $this->connection->select('SELECT NAME FROM sqlite_master WHERE type="table"');

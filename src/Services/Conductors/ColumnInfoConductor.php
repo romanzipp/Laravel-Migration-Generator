@@ -9,7 +9,7 @@ use romanzipp\MigrationGenerator\Services\Objects\MigrationColumnMethod;
 class ColumnInfoConductor
 {
     /**
-     * @var Column
+     * @var \Doctrine\DBAL\Schema\Column
      */
     private $column;
 
@@ -163,7 +163,7 @@ class ColumnInfoConductor
      * Build the method signature string.
      *
      * @param string $name
-     * @param array $parameters
+     * @param mixed[] $parameters
      *
      * @return string
      */
@@ -192,7 +192,7 @@ class ColumnInfoConductor
         return $method;
     }
 
-    public function __invoke()
+    public function __invoke(): string
     {
         $line = '$table';
 

@@ -4,10 +4,20 @@ namespace romanzipp\MigrationGenerator\Services\Objects;
 
 class MigrationColumnMethod
 {
+    /**
+     * @var string
+     */
     public $name;
 
+    /**
+     * @var mixed[]
+     */
     public $parameters;
 
+    /**
+     * @param string $name
+     * @param mixed[] $parameters
+     */
     public function __construct(string $name, array $parameters = [])
     {
         [$name, $parameters] = self::simplify($name, $parameters) ?? [$name, $parameters];
@@ -16,6 +26,12 @@ class MigrationColumnMethod
         $this->parameters = $parameters;
     }
 
+    /**
+     * @param string $name
+     * @param mixed[] $parameters
+     *
+     * @return mixed[]|null
+     */
     private static function simplify(string $name, array $parameters): ?array
     {
         if ('bigInteger' === $name) {
