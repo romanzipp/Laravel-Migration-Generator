@@ -72,7 +72,7 @@ class TablesConductor
                 /** @phpstan-ignore-next-line */
                 $this->connection->getSchemaBuilder()->getAllTables()
             );
-            /** @phpstan-ignore-next-line */
+        /** @phpstan-ignore-next-line */
         } else {
             $tables = $this->connection->getDoctrineSchemaManager()->listTableNames();
         }
