@@ -30,7 +30,7 @@ class MigrationGeneratorService
     private $migrations = [];
 
     /**
-     * @var \romanzipp\MigrationGenerator\Console\Commands\GenerateMigrationsCommand
+     * @var \romanzipp\MigrationGenerator\Console\Commands\GenerateMigrationsCommand|null
      */
     private $command;
 
