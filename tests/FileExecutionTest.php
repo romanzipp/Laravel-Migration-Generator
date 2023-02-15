@@ -53,21 +53,25 @@ class FileExecutionTest extends TestCase
             );
 
             foreach ($migration->getColumns() as $key => $originalColumn) {
-                $this->assertEquals($originalColumn->getType(), $newColumns[$key]->getType());
+                $newColumn = $newColumns[$key];
+
+                $this->assertEquals($originalColumn->getType(), $newColumn->getType());
 
                 // MariaDB
                 if ( ! $this->isMySQL() && $originalColumn->getType() instanceof TextType) {
-                    $this->assertEquals($originalColumn->getLength(), $newColumns[$key]->getLength());
+                    $this->assertEquals($originalColumn->getLength(), $newColumn->getLength());
                 }
 
-                $this->assertEquals($originalColumn->getPrecision(), $newColumns[$key]->getPrecision());
-                $this->assertEquals($originalColumn->getUnsigned(), $newColumns[$key]->getUnsigned());
-                $this->assertEquals($originalColumn->getFixed(), $newColumns[$key]->getFixed());
-                $this->assertEquals($originalColumn->getNotnull(), $newColumns[$key]->getNotnull());
-                $this->assertEquals($originalColumn->getDefault(), $newColumns[$key]->getDefault());
-                $this->assertEquals($originalColumn->getAutoincrement(), $newColumns[$key]->getAutoincrement());
-                $this->assertEquals($originalColumn->getComment(), $newColumns[$key]->getComment());
-                $this->assertEquals($originalColumn->getName(), $newColumns[$key]->getName());
+                $this->assertEquals($originalColumn->getPrecision(), $newColumn->getPrecision());
+                $this->assertEquals($originalColumn->getUnsigned(), $newColumn->getUnsigned());
+                $this->assertEquals($originalColumn->getFixed(), $newColumn->getFixed());
+                $this->assertEquals($originalColumn->getNotnull(), $newColumn->getNotnull());
+
+                $this->assertEquals($originalColumn->getDefault(), $newColumn->getDefault());
+
+                $this->assertEquals($originalColumn->getAutoincrement(), $newColumn->getAutoincrement());
+                $this->assertEquals($originalColumn->getComment(), $newColumn->getComment());
+                $this->assertEquals($originalColumn->getName(), $newColumn->getName());
             }
         }
     }
