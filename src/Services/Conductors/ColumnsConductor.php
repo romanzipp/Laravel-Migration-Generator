@@ -31,7 +31,14 @@ class ColumnsConductor
     {
         $columns = [];
 
-        $result = $this->connection->getDoctrineSchemaManager()->listTableColumns($this->table);
+        $doctrineConnection = $this->connection->getDoctrineConnection();
+        if (method_exists($doctrineConnection, 'createSchemaManager')) {
+            $schemaManager = $doctrineConnection->createSchemaManager();
+        } else {
+            $schemaManager = $doctrineConnection->getSchemaManager();
+        }
+
+        $result = $schemaManager->listTableColumns($this->table);
 
         foreach ($result as $key => $column) {
             $columns[] = $column;
