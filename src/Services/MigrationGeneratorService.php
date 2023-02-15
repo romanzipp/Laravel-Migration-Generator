@@ -2,7 +2,6 @@
 
 namespace romanzipp\MigrationGenerator\Services;
 
-use Closure;
 use Illuminate\Database\Connection;
 use Illuminate\Foundation\Application;
 use romanzipp\MigrationGenerator\Console\Commands\GenerateMigrationsCommand;
@@ -142,7 +141,7 @@ class MigrationGeneratorService
         });
     }
 
-    private function commandExec(Closure $callback): void
+    private function commandExec(\Closure $callback): void
     {
         if ( ! isset($this->command)) {
             return;
