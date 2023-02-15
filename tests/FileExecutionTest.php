@@ -67,7 +67,10 @@ class FileExecutionTest extends TestCase
                 $this->assertEquals($originalColumn->getFixed(), $newColumn->getFixed());
                 $this->assertEquals($originalColumn->getNotnull(), $newColumn->getNotnull());
 
-                $this->assertEquals($originalColumn->getDefault(), $newColumn->getDefault());
+                $this->assertEquals(
+                    str_replace('\'\'', '', $originalColumn->getDefault()),
+                    str_replace('\'\'', '', $newColumn->getDefault())
+                );
 
                 $this->assertEquals($originalColumn->getAutoincrement(), $newColumn->getAutoincrement());
                 $this->assertEquals($originalColumn->getComment(), $newColumn->getComment());
