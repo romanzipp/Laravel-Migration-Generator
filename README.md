@@ -3,9 +3,9 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/romanzipp/laravel-migration-generator.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-migration-generator)
 [![Total Downloads](https://img.shields.io/packagist/dt/romanzipp/laravel-migration-generator.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-migration-generator)
 [![License](https://img.shields.io/packagist/l/romanzipp/laravel-migration-generator.svg?style=flat-square)](https://packagist.org/packages/romanzipp/laravel-migration-generator)
-[![GitHub Build Status SQLite](https://img.shields.io/github/workflow/status/romanzipp/Laravel-Migration-Generator/Tests%20SQLite?style=flat-square&label=SQLite)](https://github.com/romanzipp/Laravel-Migration-Generator/actions)
-[![GitHub Build Status MySQL](https://img.shields.io/github/workflow/status/romanzipp/Laravel-Migration-Generator/Tests%20MySQL?style=flat-square&label=MySQL)](https://github.com/romanzipp/Laravel-Migration-Generator/actions)
-[![GitHub Build Status MariaDB](https://img.shields.io/github/workflow/status/romanzipp/Laravel-Migration-Generator/Tests%20MariaDB?style=flat-square&label=MariaDB)](https://github.com/romanzipp/Laravel-Migration-Generator/actions)
+[![GitHub Build Status SQLite](https://img.shields.io/github/actions/workflow/status/romanzipp/Laravel-Migration-Generator/tests-sqlite.yml?branch=master&style=flat-square&label=SQLite)](https://github.com/romanzipp/Laravel-Migration-Generator/actions)
+[![GitHub Build Status MySQL](https://img.shields.io/github/actions/workflow/status/romanzipp/Laravel-Migration-Generator/tests-mysql.yml?branch=master&style=flat-square&label=MySQL)](https://github.com/romanzipp/Laravel-Migration-Generator/actions)
+[![GitHub Build Status MariaDB](https://img.shields.io/github/actions/workflow/status/romanzipp/Laravel-Migration-Generator/tests-mariadb.yml?branch=master&style=flat-square&label=MariaDB)](https://github.com/romanzipp/Laravel-Migration-Generator/actions)
 
 ### ⚠️ **WORK IN PROGRESS** ⚠️
 
