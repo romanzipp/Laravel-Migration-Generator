@@ -5,7 +5,6 @@ namespace romanzipp\MigrationGenerator\Services\Conductors;
 use Illuminate\Database\Connection;
 use Illuminate\Database\MySqlConnection;
 use Illuminate\Database\SQLiteConnection;
-use LogicException;
 
 class TablesConductor
 {
@@ -53,7 +52,7 @@ class TablesConductor
         try {
             /** @phpstan-ignore-next-line */
             return $this->connection->getSchemaBuilder()->getAllTables();
-        } catch (LogicException $e) {
+        } catch (\LogicException $e) {
             return [];
         }
     }
@@ -72,7 +71,7 @@ class TablesConductor
                 /** @phpstan-ignore-next-line */
                 $this->connection->getSchemaBuilder()->getAllTables()
             );
-        /** @phpstan-ignore-next-line */
+            /** @phpstan-ignore-next-line */
         } else {
             $tables = $this->connection->getDoctrineSchemaManager()->listTableNames();
         }
