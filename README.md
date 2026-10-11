@@ -62,12 +62,10 @@ You will see various new migration files prefixed with the current time & date.
 There are [tests](https://github.com/romanzipp/Laravel-Migration-Generator/actions) with the following matrix.
 
 - **PHP**
-  - 7.2
-  - 7.3
-  - 7.4
-  - 8.0
-  - 8.1
   - 8.2
+  - 8.3
+  - 8.4
+  - 8.5
 - **Databases**
   - SQLite
   - MySQL

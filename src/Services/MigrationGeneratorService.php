@@ -16,12 +16,12 @@ class MigrationGeneratorService
     /**
      * @var Application
      */
-    private $application = null;
+    private $application;
 
     /**
      * @var string|null
      */
-    private $connection = null;
+    private $connection;
 
     /**
      * @var \romanzipp\MigrationGenerator\Services\Objects\PendingMigration[]

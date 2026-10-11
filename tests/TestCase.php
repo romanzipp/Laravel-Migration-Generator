@@ -25,6 +25,7 @@ abstract class TestCase extends BaseTestCase
 
         config(['migration-generator.output_path' => __DIR__ . '/Support/files']);
 
+        $this->artisan('db:wipe')->run();
         $this->artisan('migrate:fresh')->run();
 
         $this->setUpDatabase($this->app);
