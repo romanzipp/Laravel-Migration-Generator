@@ -8,13 +8,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [ "7.2", "7.3", "7.4", "8.0","8.1", "8.2" ]
+        php: [ "8.2", "8.3", "8.4", "8.5" ]
         composer-dependency: [ prefer-stable, prefer-lowest ]
-        exclude:
-          - php: "8.1"
-            composer-dependency: prefer-lowest
-          - php: "8.2"
-            composer-dependency: prefer-lowest
 
     name: "MariaDB - PHP ${{ matrix.php }} - ${{ matrix.composer-dependency }}"
 
@@ -22,17 +17,17 @@ jobs:
 
     services:
       mariadb:
-        image: mariadb:10.5
+        image: mariadb:11.4
         env:
           MYSQL_DATABASE: migration_generator
           MYSQL_ROOT_PASSWORD: test
         ports:
           - 3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2

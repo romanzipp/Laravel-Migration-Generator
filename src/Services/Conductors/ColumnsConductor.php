@@ -2,7 +2,14 @@
 
 namespace romanzipp\MigrationGenerator\Services\Conductors;
 
+use Doctrine\DBAL\Connection as DoctrineConnection;
+use Doctrine\DBAL\Driver;
+use Doctrine\DBAL\Driver\Middleware\AbstractDriverMiddleware;
+use Doctrine\DBAL\Driver\PDO\Connection as PDOConnection;
+use Doctrine\DBAL\Driver\PDO\MySQL\Driver as MySQLDriver;
+use Doctrine\DBAL\Driver\PDO\SQLite\Driver as SQLiteDriver;
 use Illuminate\Database\Connection;
+use Illuminate\Database\SQLiteConnection;
 
 class ColumnsConductor
 {
@@ -31,14 +38,28 @@ class ColumnsConductor
     {
         $columns = [];
 
-        $doctrineConnection = $this->connection->getDoctrineConnection();
-        if (method_exists($doctrineConnection, 'createSchemaManager')) {
-            $schemaManager = $doctrineConnection->createSchemaManager();
-        } else {
-            $schemaManager = $doctrineConnection->getSchemaManager();
-        }
+        $pdo = $this->connection->getPdo();
 
-        $result = $schemaManager->listTableColumns($this->table);
+        $driver = new class($this->connection instanceof SQLiteConnection ? new SQLiteDriver() : new MySQLDriver(), $pdo) extends AbstractDriverMiddleware {
+            /**
+             * @var \PDO
+             */
+            private $pdo;
+
+            public function __construct(Driver $driver, \PDO $pdo)
+            {
+                parent::__construct($driver);
+
+                $this->pdo = $pdo;
+            }
+
+            public function connect(array $params): Driver\Connection
+            {
+                return new PDOConnection($this->pdo);
+            }
+        };
+
+        $result = (new DoctrineConnection([], $driver))->createSchemaManager()->listTableColumns($this->table);
 
         foreach ($result as $key => $column) {
             $columns[] = $column;

@@ -2,7 +2,6 @@
 
 namespace romanzipp\MigrationGenerator\Tests;
 
-use PHPUnit\Framework\Constraint\RegularExpression;
 use romanzipp\MigrationGenerator\Services\Objects\PendingMigration;
 
 class MigrationGeneratorConductorTest extends TestCase
@@ -65,10 +64,5 @@ class MigrationGeneratorConductorTest extends TestCase
             'Schema::dropIfExists(\'foo__bar\');',
             trim((new PendingMigration('foo__bar', []))->buildDownBody())
         );
-    }
-
-    public static function assertMatchesRegularExpression(string $pattern, string $string, string $message = ''): void
-    {
-        static::assertThat($string, new RegularExpression($pattern), $message);
     }
 }

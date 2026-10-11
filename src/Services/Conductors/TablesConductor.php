@@ -50,8 +50,7 @@ class TablesConductor
         }
 
         try {
-            /** @phpstan-ignore-next-line */
-            return $this->connection->getSchemaBuilder()->getAllTables();
+            return $this->connection->getSchemaBuilder()->getTableListing(null, false);
         } catch (\LogicException $e) {
             return [];
         }
@@ -62,19 +61,7 @@ class TablesConductor
      */
     private function getTablesForMySql(): array
     {
-        // Laravel 5.* support
-        if (is_callable([$this->connection->getSchemaBuilder(), 'getAllTables'])) {
-            $tables = array_map(
-                function ($item) {
-                    return $item->{'Tables_in_' . $this->connection->getDatabaseName()};
-                },
-                /** @phpstan-ignore-next-line */
-                $this->connection->getSchemaBuilder()->getAllTables()
-            );
-            /** @phpstan-ignore-next-line */
-        } else {
-            $tables = $this->connection->getDoctrineSchemaManager()->listTableNames();
-        }
+        $tables = $this->connection->getSchemaBuilder()->getTableListing($this->connection->getDatabaseName(), false);
 
         return array_filter(
             $tables,

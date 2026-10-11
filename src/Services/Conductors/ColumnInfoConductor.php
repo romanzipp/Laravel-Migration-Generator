@@ -3,6 +3,7 @@
 namespace romanzipp\MigrationGenerator\Services\Conductors;
 
 use Doctrine\DBAL\Schema\Column;
+use Doctrine\DBAL\Schema\DefaultExpression\CurrentTimestamp;
 use Doctrine\DBAL\Types;
 use romanzipp\MigrationGenerator\Services\Objects\MigrationColumnMethod;
 
@@ -33,12 +34,12 @@ class ColumnInfoConductor
             $methods[] = new MigrationColumnMethod('nullable');
         }
 
-        if (null !== $this->column->getComment()) {
+        if ('' !== $this->column->getComment()) {
             $methods[] = new MigrationColumnMethod('comment', [$this->column->getComment()]);
         }
 
         if (null !== $this->column->getDefault()) {
-            if ('CURRENT_TIMESTAMP' === $this->column->getDefault()) {
+            if ('CURRENT_TIMESTAMP' === $this->column->getDefault() || $this->column->getDefault() instanceof CurrentTimestamp) {
                 $methods[] = new MigrationColumnMethod('useCurrent');
             } else {
                 $methods[] = new MigrationColumnMethod('default', [$this->column->getDefault()]);
@@ -51,15 +52,15 @@ class ColumnInfoConductor
 
         $platformOptions = $this->column->getPlatformOptions();
 
-        if (empty($platformOptions) || ! is_array($platformOptions)) {
+        if (empty($platformOptions) || $this->column->getType() instanceof Types\JsonType) {
             return $methods;
         }
 
-        if (config('migration-generator.append_charset') && array_key_exists('charset', $platformOptions)) {
+        if (config('migration-generator.append_charset') && isset($platformOptions['charset'])) {
             $methods[] = new MigrationColumnMethod('charset', [$platformOptions['charset']]);
         }
 
-        if (config('migration-generator.append_collation') && array_key_exists('collation', $platformOptions)) {
+        if (config('migration-generator.append_collation') && isset($platformOptions['collation'])) {
             $methods[] = new MigrationColumnMethod('collation', [$platformOptions['collation']]);
         }
 
@@ -74,9 +75,6 @@ class ColumnInfoConductor
     public function getMethod(): ?MigrationColumnMethod
     {
         switch (get_class($this->column->getType())) {
-            case Types\ArrayType::class:
-                break;
-
             case Types\BigIntType::class:
                 return new MigrationColumnMethod('bigInteger', [$this->column->getName(), $this->column->getAutoincrement(), $this->column->getUnsigned()]);
 
@@ -109,7 +107,7 @@ class ColumnInfoConductor
                 return new MigrationColumnMethod('date', [$this->column->getName()]);
 
             case Types\DecimalType::class:
-                return new MigrationColumnMethod('decimal', [$this->column->getName(), $this->column->getPrecision()]);
+                return new MigrationColumnMethod('decimal', array_filter([$this->column->getName(), $this->column->getPrecision()]));
 
             case Types\FloatType::class:
             case Types\GuidType::class:
@@ -118,9 +116,6 @@ class ColumnInfoConductor
 
             case Types\JsonType::class:
                 return new MigrationColumnMethod('json', [$this->column->getName()]);
-
-            case Types\ObjectType::class:
-                break;
 
             case Types\SimpleArrayType::class:
                 break;
